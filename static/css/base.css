@@ -43,6 +43,10 @@ a.nav-link {
     color: var(--black);
 }
 
+.navbar .btn {
+    color: var(--black);
+}
+
 img.logo {
     width: 4.75rem;
 }
@@ -50,8 +54,16 @@ img.logo {
 /* Footer */
 footer {
     flex-shrink: 0;
+    background-color: var(--dark-blue);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-top: var(--border);
 }
 
-.navbar .btn {
-    color: var(--black);
+.social-icon {
+    height: 2rem;
+    margin: 1rem;
 }
+

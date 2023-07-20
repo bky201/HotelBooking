@@ -17,6 +17,12 @@
 </head>
 <body>
     {% include 'includes/header.html' %}
-    <h1>Booking Hotel Room</h1>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% include 'includes/footer.html' %}
 </body>
 </html>
