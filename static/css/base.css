@@ -51,6 +51,10 @@ img.logo {
     width: 4.75rem;
 }
 
+.active {
+    border-bottom: 2px solid var(--black);
+}
+
 /* Footer */
 footer {
     flex-shrink: 0;
@@ -66,4 +70,15 @@ footer {
     height: 1.2rem;
     margin: 1rem;
 }
+
+/* Form */
+
+.form {
+    width: 100%;
+    margin: 3% auto;
+    box-shadow: var(--smal-box-shadow);
+    border-radius: 7px;
+}
+
+
 
