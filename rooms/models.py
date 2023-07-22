@@ -17,7 +17,7 @@ class Room(models.Model):
     content = models.TextField()
     price = models.IntegerField()
     image = ResizedImageField(
-        size=[400, None], quality=75, upload_to='rooms/', force_format='WEBP',
+        size=[400, None], quality=75, upload_to=f"rooms/{title}/", force_format='WEBP',
         blank=False, null=False
         )
     excerpt = models.TextField(blank=True)
