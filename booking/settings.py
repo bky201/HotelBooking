@@ -48,10 +48,12 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'cloudinary',
+    'django_summernote',
     
 
     # Apps
     'home',
+    'rooms',
 
     # Other
     'crispy_forms',
@@ -60,6 +62,8 @@ INSTALLED_APPS = [
     
     
 ]
+
+
 
 SITE_ID = 1
 
@@ -182,9 +186,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 
 # Default primary key field type
