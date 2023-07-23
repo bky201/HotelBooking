@@ -19,10 +19,10 @@
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rooms</a>
+            <a class="nav-link {% if url_name == 'roomlist' %}active{% endif %}" href="{% url 'roomlist' %}">Rooms</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'add_room' %}active{% endif %}" href="{% url 'add_room' %}">Booking</a>
+            <a class="nav-link {% if url_name == 'book_room' %}active{% endif %}" href="{% url 'book_room' %}">Booking</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>

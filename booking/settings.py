@@ -48,24 +48,35 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'cloudinary',
-    'django_summernote',
     
 
     # Apps
     'home',
-    'rooms',
+    'roombooking',
 
     # Other
     'crispy_forms',
     'crispy_bootstrap5',
+    'djrichtextfield',
 
     
     
 ]
 
-
-
 SITE_ID = 1
+
+DJRICHTEXTFIELD_CONFIG = {
+    'js':['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
+    'init_template': 'djrichtextfield/init/ckeditor.js',
+    'settings': {
+        'toolbar': [
+            ['Format', 'Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'], ['Undo', 'Redo'],
+            ['Maximize']
+        ],
+        'format_tags': 'p;h1;h2;h3'
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

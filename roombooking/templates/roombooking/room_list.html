@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Rooms{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center p-2">
+    Room Categories
+</h1>
+<div class="container d-flex flex-row flex-wrap justify-content-center">
+    {% for room in roomlist %}
+    <a href="" class="rooms" aria-label="Click to view {{room.title}}">
+        <div class="card m-3" style="width: 18rem;">
+            <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
+            <div class="card-body">
+              <h2 class="card-title">{{ room.title }}</h2>
+              <p class="card-text">{{ room.description|truncatechars:100|safe}}</p>
+            </div>
+          </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

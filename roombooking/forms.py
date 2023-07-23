@@ -1,4 +1,5 @@
 from django import forms
+# from djrichtextfield.widgets import RichTextWidget
 from .models import Room
 
 class BookForm(forms.ModelForm):

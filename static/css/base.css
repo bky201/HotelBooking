@@ -80,5 +80,21 @@ footer {
     border-radius: 7px;
 }
 
+/* Rooms */
+
+.card {
+    height: 90%;
+    margin-top: 1rem;
+}
+
+.rooms {
+    text-decoration: none;
+    color: var(--black);
+}
+
+.rooms:hover {
+    cursor: pointer;
+}
+
 
 
