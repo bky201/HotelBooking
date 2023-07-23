@@ -34,3 +34,18 @@ class Room(models.Model):
     
     def num_of_rate(self):
         return self.rating.max()
+    
+class Comment(models.Model):
+
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    body = models.TextField() 
+    created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return f"Comment {self.body} by {self.name}"

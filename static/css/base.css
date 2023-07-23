@@ -96,5 +96,40 @@ footer {
     cursor: pointer;
 }
 
+/* Star Rating */
+div.rating {
+    width: fit-content;
+    height: fit-content;
+}
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.rating > input{
+     display:none;
+}
+.rating > label {
+    position: relative;
+    width: 2rem;
+    font-size: 2vw;
+    color: hwb(51 7% 15%);
+    cursor: pointer;
+    margin-right: 0.12rem;
+}
+.rating > label::before{
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+    }
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
+    opacity: 1 !important;
+    }
+.rating > input:checked ~ label:before{
+    opacity:1;
+    }
+.rating:hover > input:checked ~ label:before{
+    opacity: 0.4;
+     }
 
 

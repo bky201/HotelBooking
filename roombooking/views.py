@@ -11,7 +11,7 @@ class RoomList(ListView):
     template_name = 'roombooking/room_list.html'
     model = Room
     context_object_name = 'roomlist'
-    paginate = 6
+    paginate_by = 6
 
 class RoomBooking(LoginRequiredMixin, CreateView):
     """ Create booking """
