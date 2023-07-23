@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} Room Detail - {{roomdetail.title}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="roomdetail-info mt-3 p-1">
+            <div class="roomdetail-img">
+                <img src="{{ roomdetail.image.url }}" alt="{{roomdetail.image_alt}}" class="roomdetail-pic">
+            </div>
+            <div class="room-detail">
+              <h1 class="text-center">{{ roomdetail.title }}</h1>  
+              <p class="text-center">Detail of {{ roomdetail.title }}</p>
+              <hr/>
+              <p><strong>Room-service-1: </strong> {{ roomdetail.title }}</p>
+              <p><strong>Room-service-2: </strong> {{ roomdetail.title }}</p>
+
+              {% if request.user == roomdetail.user %}
+                <div class="text-center">
+                    <a href="" class="btn btn-primary w-25">Edit</a>
+                    <a href="" class="btn btn-primary w-25">Delete</a>
+                </div>
+              {% endif %}
+            </div>
+        </div>
+        <div class="roomdetail-container">
+            <div class="services p-3">
+                <h2>Services</h2>
+                <p>roomdetail.services|safe </p>
+            </div>
+        </div>
+        <div class="roomdetail-container">
+            <div class="instructions p-3">
+                <h2>Services</h2>
+                <p>roomdetail.services|safe</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

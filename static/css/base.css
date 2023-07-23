@@ -132,4 +132,58 @@ div.rating {
     opacity: 0.4;
      }
 
+/* room_detail */
+.roomdetail-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.roomdetail-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.services, .instructions, .room-detail {
+    width: 100;
+}
+
+.roomdetail-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roomdetail-pic {
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 62.5em) {
+    .roomdetail-info {
+        flex-direction: row;
+        border: 1px solid var(--black);
+    }
+
+    .roomdetail-img {
+        width: 40%;
+        margin: 0 auto;
+    }
+
+    .room-detail {
+        width: 60%;
+        padding: 2rem;
+    }
+
+    .roomdetail-container {
+        flex-direction: row;
+    }
+
+    .services {
+        width: 33.33%;
+    }
+
+    .instructions {
+        width: 66.66%;
+    }
+}

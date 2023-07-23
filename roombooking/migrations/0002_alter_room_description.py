@@ -5,15 +5,14 @@ import djrichtextfield.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('roombooking', '0001_initial'),
+        ("roombooking", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='room',
-            name='description',
+            model_name="room",
+            name="description",
             field=djrichtextfield.models.RichTextField(max_length=10000),
         ),
     ]
