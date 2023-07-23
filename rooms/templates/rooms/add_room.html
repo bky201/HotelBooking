@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block tite %}Room Booking{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data" class="p-2 form">
+        <h1 class="text-center">Room Booking</h1>
+        {% csrf_token %}
+        {{ token.media }}
+        {{ form|crispy }}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

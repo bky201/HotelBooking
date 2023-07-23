@@ -17,12 +17,12 @@ class Room(models.Model):
     content = models.TextField()
     price = models.IntegerField()
     image = ResizedImageField(
-        size=[400, None], quality=75, upload_to=f"rooms/{title}/", force_format='WEBP',
+        size=[400, None], quality=75, upload_to= "rooms/", force_format='WEBP',
         blank=False, null=False
         )
     excerpt = models.TextField(blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    available_on = models.DateTimeField(auto_now_add=True)
+    available_on = models.DateTimeField()
     rating = models.ManyToManyField(User, related_name='room_rate', blank=True)    
 
     class Meta:

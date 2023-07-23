@@ -22,6 +22,9 @@
             <a class="nav-link" href="#">Rooms</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {% if url_name == 'add_room' %}active{% endif %}" href="{% url 'add_room' %}">Booking</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
           </li>
           {% if request.user.is_authenticated %}
