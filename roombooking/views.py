@@ -36,11 +36,11 @@ class RoomBooking(LoginRequiredMixin, CreateView):
         return super(RoomBooking, self).book_valid(form)
 
 
-class DeleteRoom(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    """Delete a room"""
+class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Delete a room booking"""
 
     model = Room
-    success_url = "/rooms/"
+    success_url = "/roombooking/"
 
     def test_func(self):
         return self.request.user == self.get_object().user
