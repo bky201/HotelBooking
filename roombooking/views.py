@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, DetailView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from .models import Room
@@ -25,7 +25,7 @@ class RoomDetail(DetailView):
 class RoomBooking(LoginRequiredMixin, CreateView):
     """Create booking"""
 
-    template_name = "roombooking/book_room.html"
+    template_name = "roombooking/room_booking.html"
     model = Room
     queryset = Room.objects.filter(status=1).order_by("-available_on")
     form_class = BookForm
@@ -34,6 +34,17 @@ class RoomBooking(LoginRequiredMixin, CreateView):
     def book_valid(self, form):
         form.instance.user = self.request.user
         return super(RoomBooking, self).book_valid(form)
+
+
+class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """Edit a booking"""
+    template_name = "roombooking/edit_booking.html"
+    model = Room
+    form_class = BookForm
+    success_url = "/roombooking/"
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
 
 
 class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
