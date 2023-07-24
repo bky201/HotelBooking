@@ -1,1 +1,49 @@
 {% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container flex-column pt-3">
+    <section class="text-center">
+
+        <h1 class="main-title mx-auto">We provide quality Hotel Services and room booking.</h1>
+
+        <h2 class="main-title mx-auto">Hotel Service:</h2>
+        <p class="pt-4">
+
+            At our esteemed hotel, we pride ourselves on delivering exceptional hospitality and unparalleled service to
+            all our guests. From the moment you step into our welcoming lobby, our dedicated staff is committed to
+            ensuring your stay is nothing short of extraordinary. Impeccable attention to detail, round-the-clock
+            assistance, and a warm, inviting atmosphere create an unforgettable experience. Whether you're visiting for
+            business or pleasure, our hotel service extends beyond just accommodation. Our array of amenities, including
+            fine dining options, a rejuvenating spa, and state-of-the-art fitness facilities, cater to your every need,
+            making your stay with us an exquisite journey of comfort and luxury.
+        </p>
+
+        <h2 class="main-title mx-auto">Room Booking:</h2>
+        <p class="pt-4">
+            Booking a room with us is a seamless and user-friendly process designed to offer convenience and
+            flexibility. Our intuitive online booking platform allows you to effortlessly browse through a range of room
+            options, each thoughtfully designed to meet varying preferences and requirements. Whether you seek a cozy
+            single room or a lavish suite with panoramic views, our diverse selection ensures there's a perfect fit for
+            everyone. Furthermore, our reservation team is readily available to assist you with any inquiries or special
+            requests you may have, ensuring a smooth and personalized booking experience. Rest assured, once your
+            reservation is confirmed, you can eagerly anticipate an unforgettable stay at our hotel, where comfort,
+            style, and impeccable service await.
+        </p>
+    </section>
+    <section>
+        <div class="room-cont">
+            {% for room in roomlist %}
+                <a href="{% url 'room_detail' room.id %}" class="img-container">
+                    <img src="{{room.image.url}}" alt="{{room.image_alt}}" style="width: 100%">
+                    <div class="centered">
+                        <h2>{{ room.title }}</h2>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -12,8 +12,9 @@
               <h1 class="text-center">{{ roomdetail.title }}</h1>  
               <p class="text-center">Detail of {{ roomdetail.title }}</p>
               <hr/>
-              <p><strong>Room-service-1: </strong> {{ roomdetail.title }}</p>
-              <p><strong>Room-service-2: </strong> {{ roomdetail.title }}</p>
+              <p>{{ roomdetail.description|safe }}</p>
+              <p class="p-3"><strong>Room-service-1: </strong> {{ roomdetail.title }}</p>
+              <p class="p-3"><strong>Room-service-2: </strong> {{ roomdetail.title }}</p>
 
               {% if request.user == roomdetail.user %}
                 <div class="text-center">
