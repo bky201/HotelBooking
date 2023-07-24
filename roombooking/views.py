@@ -1,4 +1,5 @@
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
+from django.db.models import Q
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from .models import Room
@@ -12,6 +13,18 @@ class RoomList(ListView):
     model = Room
     context_object_name = "roomlist"
     paginate_by = 6
+
+    def get_queryset(self, **kwargs):
+        query = self.request.GET.get('q')
+        if query:
+            roomlist = self.model.objects.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query)
+            )
+        else:
+            roomlist = self.model.objects.all()
+        return roomlist
+    
 
 
 class RoomDetail(DetailView):
