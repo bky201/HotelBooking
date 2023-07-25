@@ -1,20 +1,48 @@
 {% load static %}
 
-<footer>
-    <!-- Social media icons -->
-    <a href="#" target="_blank" rel="noopener" aria-label="Linked - Opens in a new tab">
-        <img src="{% static '/images/linkedin.webp' %}" alt="Linkedin Icon" class="social-icon">
-    </a>
-    <a href="#" target="_blank" rel="noopener" aria-label="Instagram - Opens in a new tab">
-        <img src="{% static '/images/instagram.webp' %}" alt="Instagram Icon" class="social-icon">
-    </a>
-    <a href="#" target="_blank" rel="noopener" aria-label="Youtube - Opens in a new tab">
-        <img src="{% static '/images/youtube.webp' %}" alt="Youtube Icon" class="social-icon">
-    </a>
-    <a href="#" target="_blank" rel="noopener" aria-label="Twitter - Opens in a new tab">
-        <img src="{% static '/images/twitter.webp' %}" alt="Twitter Icon" class="social-icon">
-    </a>
-    <a href="#" target="_blank" rel="noopener" aria-label="Github - Opens in a new tab">
-        <img src="{% static '/images/github.webp' %}" alt="Github Icon" class="social-icon">
-    </a>
+<footer id="footer" class="text-color">
+    <div class="container">
+        <div class="row">
+            <div id="services" class="col-sm-4 info-box">
+                <h3>Book Our Services</h3>
+                    <p>Transport service</p>
+                    <p>Security service</p>
+                    <p>House Keeping</p>
+                    <p>Laundery service</p>
+                    <p>Tour guide</p>
+                    </ul>
+            </div>
+
+            <div id="contact" class="col-sm-4 info-box">
+                <h3>Contact</h3>
+                    <p><img src="{% static '/images/phone-icon.png' %}" alt="Phone Icon" class="social-icon">
+                        +491111111111</p>
+                    <p><img src="{% static '/images/envelope-icon.png' %}" alt="Email Icon"
+                            class="social-icon">
+                        info@panorahotle.com</p>
+                    <p><img src="{% static '/images/map-icon.png' %}" alt="location Icon" class="social-icon">
+                        WH, 28759, Bremen</p>
+            </div>
+
+            <div id="social-icon" class="col-sm-4 info-box">
+                <h3>Our Social Media</h3>
+                    <p><a href="#" target="_blank" rel="noopener" aria-label="Linked - Opens in a new tab">
+                            <img src="{% static '/images/linkedin.webp' %}" alt="Linkedin Icon"
+                                class="social-icon">Linkedin
+                        </a></p>
+                    <p><a href="#" target="_blank" rel="noopener" aria-label="Instagram - Opens in a new tab">
+                            <img src="{% static '/images/instagram.webp' %}" alt="Instagram Icon"
+                                class="social-icon">Instagram
+                        </a></p>
+                    <p><a href="#" target="_blank" rel="noopener" aria-label="Youtube - Opens in a new tab">
+                            <img src="{% static '/images/youtube.webp' %}" alt="Youtube Icon"
+                                class="social-icon">Youtube
+                        </a></p>
+                    <p><a href="#" target="_blank" rel="noopener" aria-label="Twitter - Opens in a new tab">
+                            <img src="{% static '/images/twitter.webp' %}" alt="Twitter Icon"
+                                class="social-icon">Twitter
+                        </a></p>
+            </div>
+        </div>
+    </div>
 </footer>

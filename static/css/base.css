@@ -57,8 +57,7 @@ img.logo {
 
 /* Footer */
 footer {
-    flex-shrink: 0;
-    background-color: var(--dark-blue);
+    flex-shrink: 10;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -68,7 +67,25 @@ footer {
 
 .social-icon {
     height: 1.2rem;
-    margin: 1rem;
+    margin: 0.2rem;
+}
+
+footer#footer {
+    background: url("/static/images/building-4.jpg") center center / cover no-repeat fixed;
+}
+
+.info-box h3,
+.info-box p,
+.info-box p a {
+    list-style-type: none;
+    text-decoration: none !important;
+    color: white;
+    font-weight: 900;
+}
+
+
+div .info-box {
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Form */
