@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Room, Comment
+from .models import Room, Comment, About
+
+
+@admin.register(About)
+class AboutAdmin(admin.ModelAdmin):
+
+    list_display = ("title", "content")
+    search_fields = ["title", "content"]
 
 
 @admin.register(Room)

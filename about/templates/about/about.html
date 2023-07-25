@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+{% load static %}
+
+{% include 'includes/welcome.html' %}
+
+<div class="container flex-column pt-3">
+    <section>
+    <div class="row">
+        {% for about in aboutpage %}
+        <div class="col-4 img-container" style="width: 18rem;">
+            <img src="{{about.image.url}}" alt="{{about.image_alt}}">
+        </div>
+        <div class="col-8">
+            <h2>{{ about.title }}</h2>
+            {{ about.content | safe }}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+</div>
+{% endblock %}

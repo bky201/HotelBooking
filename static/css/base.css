@@ -196,6 +196,29 @@ a.img-container:hover {
     position: absolute;
 }
 
+/* welcome */
+
+.text-center.page-header {
+    text-align: center;
+    color: yellow;
+    font-weight: 700;
+    font-size: 50em;
+}
+
+.page-header {
+	height: 50vh;
+	background: center 75% / cover no-repeat;
+}
+
+#home {
+    background: url("/static/images/building-3.jpg") center center / cover no-repeat fixed;;
+}
+
+.vertical-center {
+    position: relative;
+    top: 60%;
+}
+
 @media screen and (min-width:40em) {
     
     .form {
@@ -211,6 +234,7 @@ a.img-container:hover {
         width: 30%;
     }
 }
+
 
 @media screen and (min-width: 62.5em) {
     .main-title {

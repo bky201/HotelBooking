@@ -57,3 +57,27 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.name}"
+    
+
+class About(models.Model):
+    """
+    A model to create and manage rooms
+    """
+
+    title = models.CharField(max_length=200, null=False, blank=False)
+    content = RichTextField(max_length=10000, null=False, blank=False)
+    image = ResizedImageField(
+        size=[400, 300],
+        quality=75,
+        upload_to="imgroomsbooking/",
+        force_format="WEBP",
+        blank=False,
+        null=False,
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return self.title
