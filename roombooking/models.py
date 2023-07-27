@@ -1,26 +1,45 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
 
-STATUS = ((0, "Available"), (1, "Booked"))
+STATUS = ((1, "Available"), (0, "Not availab"))
 
+ROOM_TITLE = (
+        ('Single-bedroom', 'SINGLE-BEDROOM'),
+        ('Double-bedroom', 'DOUBLE-BEDROOM'),
+        ('King-room', 'KING-ROOM'),
+        ('Deluxe-room', 'DELUXE-ROOM'),
+        ('Twin-room', 'TWIN-ROOM'),
+    )
+
+ROOM_SERVICES = (
+        ('Laundry and Dry-cleaner', 'LAUNDRY AND DRY-CLEANER'),
+        ('Bath, Sauna and Swimming-pool', 'BATH, SAUNA AND SWIMMING-POOL'),
+        ('Billiard, Gym and Playground', 'BILLIARD, GYM AND PLAYGROUND'),
+        ('Sport-Equipment and House-appliance', 'SPORT-EQUIMENT AND HOUSE-APPLIANCE'),
+        ('Car-rent, restaurant and Tour-guide', 'CAR-RENT, RESTAURANT AND TOUR-GUIDE'),
+    )
+
+FEATURES = (
+        ('Balcony/terrace', 'Balcony/terrace'),
+        ('Street view', 'Street view'),
+        ('Garden view', 'Garden view'),
+        ('Pool view', 'Pool view'),
+    )
 
 class Room(models.Model):
     """
     A model to create and manage rooms
     """
-
-    title = models.CharField(max_length=200, null=False, blank=False)
+    
+    title = models.CharField(max_length=200, choices=ROOM_TITLE, default='Single-bedroom')
     slug = models.SlugField(max_length=200, unique=True)
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="booking_owner"
-    )
-    size = models.IntegerField()
-    features = models.CharField(max_length=30, null=False, blank=False)
-    description = RichTextField(max_length=10000, null=False, blank=False)
-    price = models.IntegerField()
+    number = models.IntegerField(default=1)
+    features = models.CharField(max_length=30, choices=FEATURES, default='Balcony/terrace')
+    beds = models.IntegerField(default=1)
     image = ResizedImageField(
         size=[400, None],
         quality=75,
@@ -29,19 +48,27 @@ class Room(models.Model):
         blank=False,
         null=False,
     )
-    excerpt = models.TextField(blank=True)
-    status = models.IntegerField(choices=STATUS, default=0)
-    available_on = models.DateTimeField()
+    status = models.IntegerField(choices=STATUS)
     rating = models.ManyToManyField(User, related_name="room_rate", blank=True)
 
     class Meta:
-        ordering = ["-size"]
+        ordering = ["-number"]
 
     def __str__(self):
         return self.title
+    
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    number = models.IntegerField(default=1)
+    check_in = models.DateTimeField(default=timezone.now)
+    check_out = models.DateTimeField(default=timezone.now)
 
-    def num_of_rate(self):
-        return self.rating.max()
+    class Meta:
+        ordering = ["-check_in"]
+
+    def __str__(self):
+        return f"(self.user) booked (self.room)"
 
 
 class Comment(models.Model):

@@ -17,7 +17,11 @@
               <p>{{ roomdetail.description|safe }}</p>
               <p class="p-3"><strong>Room-service-1: </strong> {{ roomdetail.title }}</p>
               <p class="p-3"><strong>Room-service-2: </strong> {{ roomdetail.title }}</p>
-
+              <div class="text-center">
+                <a href="{% url 'room_booking' %}">
+                    <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
+                </a>
+            </div>  
               {% if request.user == roomdetail.user %}
                 <div class="text-center">
                     <a href="{% url 'edit_roombooking' roomdetail.id %}" class="btn btn-primary w-25">Edit</a>

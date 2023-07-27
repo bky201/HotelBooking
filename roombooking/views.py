@@ -2,7 +2,8 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 from django.db.models import Q
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from .models import Room
+from django.contrib import messages
+from .models import Room, Booking
 from .forms import BookForm
 
 
@@ -26,7 +27,6 @@ class RoomList(ListView):
         return roomlist
     
 
-
 class RoomDetail(DetailView):
     """View a single room"""
 
@@ -39,8 +39,8 @@ class RoomBooking(LoginRequiredMixin, CreateView):
     """Create booking"""
 
     template_name = "roombooking/room_booking.html"
-    model = Room
-    queryset = Room.objects.filter(status=1).order_by("-available_on")
+    model = Booking
+    queryset = Room.objects.filter(status=1).order_by("-number")
     form_class = BookForm
     success_url = "/roombooking/"
 
