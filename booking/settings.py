@@ -67,6 +67,9 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+LOGIN_REDIRECT = '/'
+LOGOUT_REDIRECT = '/'
+
 DJRICHTEXTFIELD_CONFIG = {
     'js':['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
     'init_template': 'djrichtextfield/init/ckeditor.js',
