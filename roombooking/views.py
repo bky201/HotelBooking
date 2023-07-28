@@ -34,19 +34,27 @@ class RoomDetail(DetailView):
     model = Room
     context_object_name = "roomdetail"
 
-
 class RoomBooking(LoginRequiredMixin, ListView):
     """Create booking"""
 
     template_name = "roombooking/room_booking.html"
-    model = Booking
+    model = Room
     queryset = Room.objects.filter(status=1).order_by("-number")
-    form_class = BookForm
-    success_url = "/roombooking/"
+    context_object_name = "roombook"
 
-    def book_valid(self, form):
-        form.instance.user = self.request.user
-        return super(RoomBooking, self).book_valid(form)
+    
+# class RoomBooking(LoginRequiredMixin, ListView):
+#     """Create booking"""
+
+#     template_name = "roombooking/room_booking.html"
+#     model = Booking
+#     queryset = Room.objects.filter(status=1).order_by("-number")
+#     form_class = BookForm
+#     success_url = "/roombooking/"
+
+#     def book_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super(RoomBooking, self).book_valid(form)
 
 
 class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

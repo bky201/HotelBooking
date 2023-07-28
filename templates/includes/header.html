@@ -19,7 +19,7 @@
             <a class="nav-link {% if url_name == 'aboutpage' %}active{% endif %}" href="{% url 'aboutpage' %}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'roomlist' %}active{% endif %}" href="{% url 'roomlist' %}">Rooms</a>
+            <a class="nav-link {% if url_name == 'room_list' %}active{% endif %}" href="{% url 'room_list' %}">Rooms</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if url_name == 'room_booking' %}active{% endif %}" href="{% url 'room_booking' %}">Booking</a>
@@ -38,7 +38,7 @@
           {% endif %}
         </ul>
         <!-- form for search bar -->
-        <form class="d-flex" role="search" method="GET" action="{% url 'roomlist' %}">
+        <form class="d-flex" role="search" method="GET" action="{% url 'room_list' %}">
           <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-secondary" type="submit">Search</button>
         </form>
