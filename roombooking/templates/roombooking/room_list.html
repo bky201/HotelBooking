@@ -17,8 +17,6 @@
                 <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
                 <div class="card-body">
                     <h2 class="card-title">{{ room.title }}</h2>
-                    <p class="card-text">{{ room.excerpt }}</p>
-                    <p class="card-text">{{ room.description|truncatechars:100|safe}}</p>
                     <!-- Rating star -->
                     <div class="rating">
                         <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
@@ -31,7 +29,8 @@
                 {% else %}
                 <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
                 <div class="card-body">
-                    <h3 class="card-title">Room Not available at the moment.</h3>
+                    <h3 class="card-title">{{ room.title }}</h3>
+                    <p class="card-title">Room Not available at the moment.</p>
                     <div class="rating">
                         <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
                         <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>

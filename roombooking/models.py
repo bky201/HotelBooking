@@ -48,6 +48,20 @@ class Room(models.Model):
         blank=False,
         null=False,
     )
+    imageOne = ResizedImageField(
+        size=[400, None],
+        quality=75,
+        upload_to="imgroomsbooking/",
+        force_format="WEBP",
+        null=True,
+    )
+    imageTwo = ResizedImageField(
+        size=[400, None],
+        quality=75,
+        upload_to="imgroomsbooking/",
+        force_format="WEBP",
+        null=True,
+    )
     status = models.IntegerField(choices=STATUS)
     rating = models.ManyToManyField(User, related_name="room_rate", blank=True)
 

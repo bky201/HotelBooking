@@ -8,4 +8,4 @@ class Index(ListView):
     context_object_name = 'roomlist'
 
     def get_queryset(self):
-        return self.model.objects.all()[:4]
+        return self.model.objects.all()[:3]

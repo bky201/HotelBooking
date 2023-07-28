@@ -18,12 +18,13 @@ class BookingAdmin(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     list_display = (
         "title",
+        "number",
         "slug",
         "features",
         "status",
     )
-    search_fields = ["title",]
-    prepopulated_fields = {"slug": ("title",)}
+    search_fields = ["title", "number"]
+    prepopulated_fields = {"slug": ("title", "number")}
     list_filter = ("status", )
 
 
