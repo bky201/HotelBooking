@@ -11,8 +11,8 @@ class AboutAdmin(admin.ModelAdmin):
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
 
-    list_display = ("user", "room", "number", "check_in", "check_out")
-    search_fields = ["user", "room", "number", "check_in", "check_out"]
+    list_display = ("user", "room", "check_in", "check_out")
+    search_fields = ["user", "room", "check_in", "check_out"]
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
@@ -21,11 +21,10 @@ class RoomAdmin(admin.ModelAdmin):
         "number",
         "slug",
         "features",
-        "status",
     )
     search_fields = ["title", "number"]
     prepopulated_fields = {"slug": ("title", "number")}
-    list_filter = ("status", )
+    list_filter = ("title", )
 
 
 @admin.register(Comment)

@@ -33,27 +33,40 @@ class RoomDetail(DetailView):
     model = Room
     context_object_name = "roomdetail"
 
-class RoomBooking(LoginRequiredMixin, ListView):
-    """Create booking"""
+class RoomBookingList(LoginRequiredMixin, ListView):
+    """View all booking"""
 
     template_name = "roombooking/room_booking.html"
-    model = Room
-    queryset = Room.objects.filter(status=1).order_by("-number")
+    model = Booking
+    queryset = Booking.objects.all().order_by("-check_in")
     context_object_name = "roombook"
 
+    def get_queryset(self):
+        return self.model.objects.all()
     
-# class RoomBooking(LoginRequiredMixin, ListView):
-#     """Create booking"""
+    
+class BookedRoom(LoginRequiredMixin, CreateView):
+    """Create booking"""
 
-#     template_name = "roombooking/room_booking.html"
-#     model = Booking
-#     queryset = Room.objects.filter(status=1).order_by("-number")
-#     form_class = BookForm
-#     success_url = "/roombooking/"
+    form_class = BookForm
+    template_name = "roombooking/booking_list.html"
+    model = Booking
+    success_url = "/roombooking/"
 
-#     def book_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super(RoomBooking, self).book_valid(form)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def check_room_availability(self, room, check_in, check_out):
+        check_list = []
+        queryset = self.model.objects.filter(room=room)
+        for booking in queryset:
+            if booking.check_in > check_out or booking.check_out < check_in:
+                check_list.append(True)
+            else:
+                check_list.append(False)
+        return all(check_list)
+    
 
 
 class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

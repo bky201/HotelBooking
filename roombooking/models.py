@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
 
-STATUS = ((1, "Available"), (0, "Not availab"))
-
 ROOM_TITLE = (
         ('Single-bedroom', 'SINGLE-BEDROOM'),
         ('Double-bedroom', 'DOUBLE-BEDROOM'),
@@ -62,19 +60,17 @@ class Room(models.Model):
         force_format="WEBP",
         null=True,
     )
-    status = models.IntegerField(choices=STATUS)
     rating = models.ManyToManyField(User, related_name="room_rate", blank=True)
 
     class Meta:
         ordering = ["-number"]
 
     def __str__(self):
-        return self.title
+        return f"{self.title}-{self.number} with {self.beds} and {self.features}"
     
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    number = models.IntegerField(default=1)
     check_in = models.DateTimeField(default=timezone.now)
     check_out = models.DateTimeField(default=timezone.now)
 

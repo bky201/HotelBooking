@@ -9,12 +9,11 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Booking
-        fields = ["user", "room", "number", 'check_in', 'check_out']
+        fields = ["user", "room", 'check_in', 'check_out']
 
         labels = {
             "user": "Room user",
             "room": "Room title",
-            "number": "room number available",
             "check_in": "Booking start date",
             "check_out": "Booking end date",
         }

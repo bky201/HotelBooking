@@ -13,7 +13,6 @@
         {% for room in roomlist %}
         <a href="{% url 'room_detail' room.id %}" class="rooms" aria-label="Click to view {{room.title}}">
             <div class="card m-3" style="width: 18rem;">
-                {% if room.status == 1 %}
                 <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
                 <div class="card-body">
                     <h2 class="card-title">{{ room.title }}</h2>
@@ -26,20 +25,6 @@
                         <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
                     </div>
                 </div>
-                {% else %}
-                <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
-                <div class="card-body">
-                    <h3 class="card-title">{{ room.title }}</h3>
-                    <p class="card-title">Room Not available at the moment.</p>
-                    <div class="rating">
-                        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                    </div>
-                </div>
-                {% endif %}
             </div>
         </a>
         {% endfor %}

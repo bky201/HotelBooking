@@ -11,9 +11,10 @@
         <div class="card m-3" style="width: 18rem;">
             <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
             <div class="card-body">
-                <h2 class="card-title">{{ room.title }}</h2>
-                <p class="card-text">{{ room.number }}</p>
-                <p class="card-text">{{ room.features|safe}}</p>
+                <h2 class="card-title">{{ room.room }}</h2>
+                <p class="card-text">{{ room.user }}</p>
+                <p class="card-text">{{ room.check_in}}</p>
+                <p class="card-text">{{ room.check_out}}</p>
                 <!-- Rating star -->
                 <div class="rating">
                     <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
