@@ -5,16 +5,40 @@
 {% block content %}
 
 {% include 'includes/welcome.html' %}
-<div class="container">
+<div class="container d-flex flex-row flex-wrap justify-content-center">
+    {% for room in roomlist %}
+    <a href="{% url 'room_detail' room.id %}" class="rooms" aria-label="Click to view {{room.title}}">
+        <div class="card m-3" style="width: 18rem;">
+            <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
+            <div class="card-body">
+                <h2 class="card-title">{{ room.title }}</h2>
+                <p class="card-text">{{ room.number }}</p>
+                <p class="card-text">{{ room.features|safe}}</p>
+                <!-- Rating star -->
+                <div class="rating">
+                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+<!-- <div class="container">
     <form method="POST" enctype="multipart/form-data" class="p-2 form">
         <h1 class="text-center">Room Booking</h1>
         {% csrf_token %}
         {{ form.media }}
         {{ form|crispy }}
         <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
+            <a href="{% url 'roomlist' %}">
+                <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
+            </a>
         </div>
     </form>
-</div>
+</div> -->
 
 {% endblock %}

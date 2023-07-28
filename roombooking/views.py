@@ -35,7 +35,7 @@ class RoomDetail(DetailView):
     context_object_name = "roomdetail"
 
 
-class RoomBooking(LoginRequiredMixin, CreateView):
+class RoomBooking(LoginRequiredMixin, ListView):
     """Create booking"""
 
     template_name = "roombooking/room_booking.html"
