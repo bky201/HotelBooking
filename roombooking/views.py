@@ -2,6 +2,7 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 from django.db.models import Q
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import Room, Booking
 from .forms import BookForm
@@ -51,24 +52,35 @@ class BookedRoom(LoginRequiredMixin, CreateView):
     form_class = BookForm
     template_name = "roombooking/booking_list.html"
     model = Booking
+    context_object_name = "roombooking_list"
     success_url = "/roombooking/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        room = form.cleaned_data['room']
+        check_in = form.cleaned_data['check_in']
+        check_out = form.cleaned_data['check_out']
+
+        # Check room availability using the check_room_availability method
+        if not self.check_room_availability(room, check_in, check_out):
+            # Room is not available, show an error message
+            messages.error(self.request, "Booking is not possible at the given date.")
+            return self.form_invalid(form)
+
         return super().form_valid(form)
 
     def check_room_availability(self, room, check_in, check_out):
-        check_list = []
-        queryset = self.model.objects.filter(room=room)
-        for booking in queryset:
-            if booking.check_in > check_out or booking.check_out < check_in:
-                check_list.append(True)
-            else:
-                check_list.append(False)
-        return all(check_list)
-    
+        existing_bookings = Booking.objects.filter(room=room, check_in__lt=check_out, check_out__gt=check_in)
+
+        for booking in existing_bookings:
+            if booking.user == self.request.user:
+                # The same user has already booked the room for the specified dates
+                return False
+
+        return True
 
 
+        
 class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a booking"""
     template_name = "roombooking/edit_booking.html"
