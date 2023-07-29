@@ -52,7 +52,6 @@ class BookedRoom(LoginRequiredMixin, CreateView):
     form_class = BookForm
     template_name = "roombooking/booking_list.html"
     model = Booking
-    context_object_name = "roombooking_list"
     success_url = "/roombooking/"
 
     def form_valid(self, form):

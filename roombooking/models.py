@@ -27,6 +27,12 @@ FEATURES = (
         ('Garden view', 'Garden view'),
         ('Pool view', 'Pool view'),
     )
+SIZES = (
+    ('Room size: 30 m²/323 ft²', 'Room size: 30 m²/323 ft²'), 
+    ('Room size: 30 m²/323 ft²', 'Room size: 35 m²/323 ft²'), 
+    ('Room size: 30 m²/323 ft²', 'Room size: 40 m²/323 ft²'), 
+    ('Room size: 30 m²/323 ft²', 'Room size: 45 m²/323 ft²'), 
+)
 
 class Room(models.Model):
     """
@@ -38,6 +44,9 @@ class Room(models.Model):
     number = models.IntegerField(default=1)
     features = models.CharField(max_length=30, choices=FEATURES, default='Balcony/terrace')
     beds = models.IntegerField(default=1)
+    size = models.CharField(max_length=60, choices=SIZES, default='Room size: 30 m²/323 ft²')
+    serviceOne = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
+    serviceTwo = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
     image = ResizedImageField(
         size=[400, None],
         quality=75,
@@ -66,7 +75,7 @@ class Room(models.Model):
         ordering = ["-number"]
 
     def __str__(self):
-        return f"{self.title}-{self.number} with {self.beds} bed/s and {self.features} features"
+        return f"{self.title} No-{self.number} with {self.beds} bed/s and {self.features} features"
     
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
