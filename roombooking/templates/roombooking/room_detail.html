@@ -7,15 +7,25 @@
 {% include 'includes/welcome.html' %}
     <div class="container">
         <div class="roomdetail-info mt-3 p-1">
-            <div class="roomdetail-img">
-                <img src="{{ roomdetail.image.url }}" alt="{{roomdetail.image_alt}}" class="roomdetail-pic">
+            <div class="card m-1">
+                <a href="{{ roomdetail.image.url }}" target="_blank" aria-label="Click to view the image">
+                    <img src="{{ roomdetail.image.url }}" alt="{{ roomdetail.image_alt }}" class="roomdetail-pic">
+                </a>
             </div>
-            <div class="roomdetail-img">
-                <img src="{{ roomdetail.imageOne.url }}" alt="{{roomdetail.imageOne_alt}}" class="roomdetail-pic">
+            <div class="card m-1">
+                <a href="{{ roomdetail.imageOne.url }}" target="_blank" aria-label="Click to view the image">
+                    <img src="{{ roomdetail.imageOne.url }}" alt="{{ roomdetail.imageOne_alt }}" class="roomdetail-pic">
+                </a>
             </div>
-            <div class="roomdetail-img">
-                <img src="{{ roomdetail.imageTwo.url }}" alt="{{roomdetail.imageTwo_alt}}" class="roomdetail-pic">
+            <div class="card m-1">
+                <a href="{{ roomdetail.imageTwo.url }}" target="_blank" aria-label="Click to view the image">
+                    <img src="{{ roomdetail.imageTwo.url }}" alt="{{ roomdetail.imageTwo_alt }}" class="roomdetail-pic">
+                </a>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="roomdetail-info mt-3 p-1">
             <div class="room-detail">
               <h1 class="text-center">{{ roomdetail.title }}</h1>  
               <p class="text-center">Detail of {{ roomdetail.title }}</p>

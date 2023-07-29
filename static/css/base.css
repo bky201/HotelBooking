@@ -172,8 +172,9 @@ div.rating {
 }
 
 .roomdetail-pic {
-    width: 100%;
-    height: auto;
+    width: 22rem;
+    height: 25rem;
+    background: center center / cover no-repeat;
 }
 
 /* home */
