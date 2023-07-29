@@ -66,7 +66,7 @@ class Room(models.Model):
         ordering = ["-number"]
 
     def __str__(self):
-        return f"{self.title}-{self.number} with {self.beds} and {self.features}"
+        return f"{self.title}-{self.number} with {self.beds} bed/s and {self.features} features"
     
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
