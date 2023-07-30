@@ -15,13 +15,13 @@
     </ul>
     {% endif %}
     <form method="POST" enctype="multipart/form-data" class="p-2 form">
-        <h1 class="text-center">Room Booking</h1>
+        <h1 class="text-center">Booking Form</h1>
         {% csrf_token %}
         {{ form.media }}
         {{ form|crispy }}
         <div class="text-center">
-            <a href="{% url 'booked_room' %}">
-                <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
+            <a href="{% url 'room_bookinglist' %}">
+                <button type="submit" class="btn btn-primary mt-2">Book Room</button>
             </a>
         </div>
     </form>

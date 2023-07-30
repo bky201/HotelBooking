@@ -1,2 +1,2 @@
-# Hotel-Room-Booking
+# Hotel-Booking
 A Django booking website

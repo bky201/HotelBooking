@@ -38,7 +38,6 @@ class Room(models.Model):
     """
     A model to create and manage rooms
     """
-    
     title = models.CharField(max_length=200, choices=ROOM_TITLE, default='Single-bedroom')
     slug = models.SlugField(max_length=200, unique=True)
     number = models.IntegerField(default=1)
@@ -72,7 +71,7 @@ class Room(models.Model):
     rating = models.ManyToManyField(User, related_name="room_rate", blank=True)
 
     class Meta:
-        ordering = ["-number"]
+        ordering = ["number"]
 
     def __str__(self):
         return f"{self.title} No-{self.number} with {self.beds} bed/s and {self.features} features"

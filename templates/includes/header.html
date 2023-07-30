@@ -25,7 +25,7 @@
             <a class="nav-link {% if url_name == 'room_bookinglist' %}active{% endif %}" href="{% url 'room_bookinglist' %}">Booking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'booked_room' %}active{% endif %}" href="{% url 'booked_room' %}">Booked Room</a>
+            <a class="nav-link {% if url_name == 'booking_form' %}active{% endif %}" href="{% url 'booking_form' %}">Form</a>
           </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">

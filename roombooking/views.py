@@ -46,13 +46,14 @@ class RoomBookingList(LoginRequiredMixin, ListView):
         return self.model.objects.all()
     
     
-class BookedRoom(LoginRequiredMixin, CreateView):
+class BookingForm(LoginRequiredMixin, CreateView):
     """Create booking"""
 
     form_class = BookForm
-    template_name = "roombooking/booking_list.html"
+    template_name = "roombooking/booking_form.html"
     model = Booking
     success_url = "/roombooking/"
+    context_object_name = "bookform"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -83,7 +84,7 @@ class BookedRoom(LoginRequiredMixin, CreateView):
 class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a booking"""
     template_name = "roombooking/edit_booking.html"
-    model = Room
+    model = Booking
     form_class = BookForm
     success_url = "/roombooking/"
 
@@ -94,7 +95,7 @@ class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """Delete a room booking"""
 
-    model = Room
+    model = Booking
     success_url = "/roombooking/"
 
     def test_func(self):

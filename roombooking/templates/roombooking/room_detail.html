@@ -30,32 +30,23 @@
               <h1 class="text-center">{{ roomdetail.title }}</h1>  
               <p class="text-center">Detail of {{ roomdetail.title }}</p>
               <hr/>
-              <p>{{ roomdetail.description|safe }}</p>
-              <p class="p-3"><strong>Room-service-1: </strong> {{ roomdetail.title }}</p>
-              <p class="p-3"><strong>Room-service-2: </strong> {{ roomdetail.title }}</p>
+              <div class="row">
+                <div class="col-6">
+                    <p class="p-2"><strong>{{ roomdetail.features|safe }}</strong></p>
+                    <p class="p-2"><strong>{{ roomdetail.size }}</strong></p>
+                    <p class="p-2"><strong>Bed: </strong> {{ roomdetail.beds }}</p>
+                </div>
+                <div class="col-6">
+                      <h3 class="p-2">Service</h3>
+                      <p class="p-2">{{roomdetail.serviceOne|safe}} </p>
+                      <p class="p-2">{{roomdetail.serviceTwo|safe}}</p>
+                </div>
+              </div>
               <div class="text-center">
-                <a href="{% url 'booked_room' %}">
+                <a href="{% url 'booking_form' %}">
                     <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
                 </a>
             </div>  
-              {% if request.user == roomdetail.user %}
-                <div class="text-center">
-                    <a href="{% url 'edit_roombooking' roomdetail.id %}" class="btn btn-primary w-25">Edit</a>
-                    <a href="{% url 'delete_roombooking' roomdetail.id %}" class="btn btn-primary w-25">Delete</a>
-                </div>
-              {% endif %}
-            </div>
-        </div>
-        <div class="roomdetail-container">
-            <div class="services p-3">
-                <h2>Services</h2>
-                <p>roomdetail.services|safe </p>
-            </div>
-        </div>
-        <div class="roomdetail-container">
-            <div class="instructions p-3">
-                <h2>Services</h2>
-                <p>roomdetail.services|safe</p>
             </div>
         </div>
     </div>
