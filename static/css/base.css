@@ -213,6 +213,17 @@ a.img-container:hover {
     left: 50%;
     position: absolute;
 }
+/* slide content */
+
+.myCarousel {
+    width: 100wh;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 70vh; 
+    background: center 75% / cover no-repeat;
+  }
 
 /* welcome */
 
