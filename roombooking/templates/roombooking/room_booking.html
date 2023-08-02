@@ -12,22 +12,37 @@
             <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
             <div class="card-body">
                 <h2 class="card-title">{{ room.room }}</h2>
+                {% if request.user.id == room.user.id %}
                 <p class="card-text">{{ room.user }}</p>
+                {% else %}
+                <p class="card-text">Customer</p>
+                {% endif %}
                 <p class="card-text">{{ room.check_in}}</p>
                 <p class="card-text">{{ room.check_out}}</p>
             </div>
             {% if request.user.id == room.user.id %}
-                <div class="text-center">
-                    {% if room.id %}
-                    <a href="{% url 'edit_roombooking' room.id %}">
-                        <button type="submit" class="btn btn-primary mt-2"> Edit </button>
-                    </a>
-                    <a href="{% url 'delete_roombooking' room.id %}">
-                        <button type="submit" class="btn btn-primary mt-2">Delete</button>
-                    </a>
-                    {% endif %}
-                </div>
-              {% endif %}
+            <div class="text-center">
+                {% if room.id %}
+                <a href="{% url 'edit_roombooking' room.id %}">
+                    <button type="submit" class="btn btn-primary mt-2"> Edit </button>
+                </a>
+                <a href="{% url 'delete_roombooking' room.id %}">
+                    <button type="submit" class="btn btn-primary mt-2">Delete</button>
+                </a>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="text-center">
+                {% if room.id %}
+                <a href="{% url 'edit_roombooking' room.id %}">
+                    <button type="submit" class="btn btn-primary mt-2" disabled> Edit </button>
+                </a>
+                <a href="{% url 'delete_roombooking' room.id %}">
+                    <button type="submit" class="btn btn-primary mt-2" disabled>Delete</button>
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
     </a>
     {% endfor %}
