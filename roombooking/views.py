@@ -46,10 +46,25 @@ class RoomBookingList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return self.model.objects.all()
     
-    
-class BookingForm(LoginRequiredMixin, CreateView):
-    """Create booking"""
+class RoomAvailabilityMixin:
+    def check_room_availability(self, room, check_in, check_out, current_booking=None):
+        # Create a queryset excluding the current booking (if provided)
+        existing_bookings = Booking.objects.filter(room=room, check_in__lt=check_out, check_out__gt=check_in)
+        if current_booking:
+            existing_bookings = existing_bookings.exclude(pk=current_booking.pk)
 
+        for booking in existing_bookings:
+            if booking.user == self.request.user:
+                # The same user has already booked the room for the specified dates
+                return False
+            elif booking.check_in < check_out or booking.check_out > check_in:
+                return False
+
+        return True
+
+
+class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
+    """Create booking"""
     form_class = BookForm
     template_name = "roombooking/booking_form.html"
     model = Booking
@@ -70,19 +85,7 @@ class BookingForm(LoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
 
-    def check_room_availability(self, room, check_in, check_out):
-        existing_bookings = Booking.objects.filter(room=room, check_in__lt=check_out, check_out__gt=check_in)
-
-        for booking in existing_bookings:
-            if booking.user == self.request.user:
-                # The same user has already booked the room for the specified dates
-                return False
-
-        return True
-
-
-        
-class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditBooking(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin, UpdateView):
     """Edit a booking"""
     template_name = "roombooking/edit_booking.html"
     model = Booking
@@ -91,6 +94,20 @@ class EditBooking(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.request.user == self.get_object().user
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        room = form.cleaned_data['room']
+        check_in = form.cleaned_data['check_in']
+        check_out = form.cleaned_data['check_out']
+
+        # Check room availability using the check_room_availability method
+        if not self.check_room_availability(room, check_in, check_out, current_booking=self.object):
+            # Room is not available, show an error message
+            messages.error(self.request, "Booking is not possible at the given date.")
+            return self.form_invalid(form)
+
+        return super().form_valid(form)
 
 
 class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
