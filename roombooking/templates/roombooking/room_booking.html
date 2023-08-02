@@ -5,7 +5,7 @@
 {% block content %}
 
 {% include 'includes/welcome.html' %}
-<div class="container d-flex flex-row flex-wrap justify-content-center">
+<div class="container booking d-flex flex-row flex-wrap justify-content-center">
     {% for room in roombook %}
     <a href="{% url 'room_detail' room.id %}" class="rooms" aria-label="Click to view {{room.title}}">
         <div class="card m-3" style="width: 18rem;">
