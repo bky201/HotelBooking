@@ -121,4 +121,9 @@ class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == self.get_object().user
 
 class Custom404View(TemplateView):
-    template_name = '404.html'
+    template_name = 'admin/404.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        response.status_code = 404
+        return response
