@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', '127.0.0.1', 'localhost']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [

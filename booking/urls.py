@@ -10,3 +10,4 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('roombooking/', include('roombooking.urls')),
 ]
+
