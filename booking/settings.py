@@ -26,9 +26,9 @@ if os.path.exists('env.py'):
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*', 'roombooking-9c7bc437dd80.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 
@@ -198,9 +198,9 @@ LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 # STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 
 # MEDIA_URL = '/media/'

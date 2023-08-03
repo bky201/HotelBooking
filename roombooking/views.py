@@ -1,7 +1,6 @@
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.shortcuts import render, HttpResponse, redirect
@@ -120,10 +119,3 @@ class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user == self.get_object().user
 
-class Custom404View(TemplateView):
-    template_name = 'admin/404.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        response.status_code = 404
-        return response

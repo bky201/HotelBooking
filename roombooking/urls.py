@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RoomBookingList, RoomList, RoomDetail, DeleteRoomBooking, EditBooking, BookingForm, Custom404View
+from .views import RoomBookingList, RoomList, RoomDetail, DeleteRoomBooking, EditBooking, BookingForm
 
 urlpatterns = [
     path("book/", RoomBookingList.as_view(), name="room_bookinglist"),
@@ -8,5 +8,5 @@ urlpatterns = [
     path("<slug:pk>/", RoomDetail.as_view(), name="room_detail"),
     path("delete/<slug:pk>/", DeleteRoomBooking.as_view(), name="delete_roombooking"),
     path("edit/<slug:pk>/", EditBooking.as_view(), name="edit_roombooking"),
-    path('404/', Custom404View.as_view(), name='custom_404'),
 ]
+
