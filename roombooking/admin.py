@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room, Booking, Comment, About
+from .models import Room, Booking, About
 
 
 @admin.register(About)
@@ -27,12 +27,3 @@ class RoomAdmin(admin.ModelAdmin):
     list_filter = ("title", )
 
 
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ("name", "body", "room", "created_on", "approved")
-    list_filter = ("approved", "created_on")
-    search_fields = ("name", "email", "body")
-    actions = ["approve_comments"]
-
-    def approve_comments(self, request, queryset):
-        queryset.update(approved=True)
