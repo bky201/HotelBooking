@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.178.25', 'roombooking-9c7bc437dd80.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', 'localhost', '127.0.0.1']
 # ALLOWED_HOSTS = ['*']
 
 
