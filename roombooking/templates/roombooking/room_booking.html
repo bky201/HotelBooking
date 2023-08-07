@@ -7,38 +7,38 @@
 {% block content %}
 
 <div class="container booking d-flex flex-row flex-wrap justify-content-center">
-    {% for room in roombook %}
-    <a href="{% url 'room_detail' room.id %}" class="rooms" aria-label="Click to view {{room.title}}">
+    {% for book in roombook %}
+    <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
         <div class="card m-3" style="width: 18rem;">
-            <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
+            <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
             <div class="card-body">
-                <h2 class="card-title">{{ room.room }}</h2>
-                {% if request.user.id == room.user.id %}
-                <p class="card-text">{{ room.user }}</p>
+                <h2 class="card-title">{{ book.room }}</h2>
+                {% if request.user.id == book.user.id %}
+                <p class="card-text">{{ book.user }}</p>
                 {% else %}
                 <p class="card-text">Customer</p>
                 {% endif %}
-                <p class="card-text">{{ room.check_in}}</p>
-                <p class="card-text">{{ room.check_out}}</p>
+                <p class="card-text">{{ book.check_in}}</p>
+                <p class="card-text">{{ book.check_out}}</p>
             </div>
-            {% if request.user.id == room.user.id %}
+            {% if request.user.id == book.user.id %}
             <div class="text-center">
-                {% if room.id %}
-                <a href="{% url 'edit_roombooking' room.id %}">
+                {% if book.id %}
+                <a href="{% url 'edit_roombooking' book.id %}">
                     <button type="submit" class="btn btn-primary mt-2"> Edit </button>
                 </a>
-                <a href="{% url 'delete_roombooking' room.id %}">
+                <a href="{% url 'delete_roombooking' book.id %}">
                     <button type="submit" class="btn btn-primary mt-2">Delete</button>
                 </a>
                 {% endif %}
             </div>
             {% else %}
             <div class="text-center">
-                {% if room.id %}
-                <a href="{% url 'edit_roombooking' room.id %}">
+                {% if book.id %}
+                <a href="{% url 'edit_roombooking' book.id %}">
                     <button type="submit" class="btn btn-primary mt-2" disabled> Edit </button>
                 </a>
-                <a href="{% url 'delete_roombooking' room.id %}">
+                <a href="{% url 'delete_roombooking' book.id %}">
                     <button type="submit" class="btn btn-primary mt-2" disabled>Delete</button>
                 </a>
                 {% endif %}
