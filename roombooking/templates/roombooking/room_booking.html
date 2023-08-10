@@ -8,6 +8,7 @@
 
 <div class="container booking d-flex flex-row flex-wrap justify-content-center">
     {% for book in roombook %}
+    {% if request.user.id == book.user.id %}
     <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
         <div class="card m-3" style="width: 18rem;">
             <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
@@ -21,7 +22,6 @@
                 <p class="card-text">{{ book.check_in}}</p>
                 <p class="card-text">{{ book.check_out}}</p>
             </div>
-            {% if request.user.id == book.user.id %}
             <div class="text-center">
                 {% if book.id %}
                 <a href="{% url 'edit_roombooking' book.id %}">
@@ -32,20 +32,10 @@
                 </a>
                 {% endif %}
             </div>
-            {% else %}
-            <div class="text-center">
-                {% if book.id %}
-                <a href="{% url 'edit_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2" disabled> Edit </button>
-                </a>
-                <a href="{% url 'delete_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2" disabled>Delete</button>
-                </a>
-                {% endif %}
-            </div>
-            {% endif %}
+            
         </div>
     </a>
+    {% endif %}
     {% endfor %}
 </div>
 
