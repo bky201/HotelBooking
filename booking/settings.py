@@ -32,8 +32,11 @@ DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if not IS_HEROKU_APP:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', 'localhost', '127.0.0.1']
 # ALLOWED_HOSTS = ['*']
