@@ -48,7 +48,7 @@ ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', 'localhost', '127.0.0
 INSTALLED_APPS = [
     
     
-    # 'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
