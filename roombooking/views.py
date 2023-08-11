@@ -1,9 +1,9 @@
+
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.db.models import Q
 from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import Room, Booking
 from .forms import BookForm
@@ -54,10 +54,8 @@ class RoomAvailabilityMixin:
             existing_bookings = existing_bookings.exclude(pk=current_booking.pk)
 
         for booking in existing_bookings:
-            if booking.user == self.request.user:
+            if booking.user == self.request.user or booking.check_in < check_out or booking.check_out > check_in:
                 # The same user has already booked the room for the specified dates
-                return False
-            elif booking.check_in < check_out or booking.check_out > check_in:
                 return False
 
         return True
@@ -82,6 +80,11 @@ class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
             # Room is not available, show an error message
             messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
+        
+        messages.success(
+            self.request,
+            f'Booking {room} Completed Successful'
+        )
 
         return super().form_valid(form)
 
@@ -91,9 +94,6 @@ class EditBooking(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin
     model = Booking
     form_class = BookForm
     success_url = reverse_lazy("room_bookinglist")
-
-    def test_func(self):
-        return self.request.user == self.get_object().user
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -107,7 +107,15 @@ class EditBooking(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin
             messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
 
+        messages.success(
+            self.request,
+            f'Booking Updated {room} Successful'
+        )
+
         return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
 
 
 class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -116,6 +124,13 @@ class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Booking
     success_url = reverse_lazy("room_bookinglist")
 
+    def form_valid(self, form):
+        """ Display message on delete success """
+        messages.success(
+            self.request,
+            'Successfully deleted {room} booking'
+        )
+        return super(DeleteRoomBooking, self).form_valid(form)
     def test_func(self):
         return self.request.user == self.get_object().user
 

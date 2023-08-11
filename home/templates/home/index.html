@@ -6,7 +6,21 @@
 
 {% block content %}
 
+<div id="msg">
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </ul>
+    {% endif %}
+</div>
+
 {% include 'includes/slide.html' %}
+
 
 <div class="home container flex-column pt-3">
     <section>

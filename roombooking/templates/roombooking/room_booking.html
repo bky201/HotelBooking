@@ -6,35 +6,47 @@
 
 {% block content %}
 
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </ul>
+{% endif %}
+
 <div class="container booking d-flex flex-row flex-wrap justify-content-center">
     {% for book in roombook %}
     {% if request.user.id == book.user.id %}
-    <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
-        <div class="card m-3" style="width: 18rem;">
-            <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
-            <div class="card-body">
-                <h2 class="card-title">{{ book.room }}</h2>
-                {% if request.user.id == book.user.id %}
-                <p class="card-text">{{ book.user }}</p>
-                {% else %}
-                <p class="card-text">Customer</p>
-                {% endif %}
-                <p class="card-text">{{ book.check_in}}</p>
-                <p class="card-text">{{ book.check_out}}</p>
+        <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
+            <div class="card m-3" style="width: 18rem;">
+                <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
+                <div class="card-body">
+                    <h2 class="card-title">{{ book.room }}</h2>
+                    {% if request.user.id == book.user.id %}
+                    <p class="card-text">{{ book.user }}</p>
+                    {% else %}
+                    <p class="card-text">Customer</p>
+                    {% endif %}
+                    <p class="card-text">{{ book.check_in}}</p>
+                    <p class="card-text">{{ book.check_out}}</p>
+                </div>
+                <div class="text-center">
+                    {% if book.id %}
+                    <a href="{% url 'edit_roombooking' book.id %}">
+                        <button type="submit" class="btn btn-primary mt-2"> Edit </button>
+                    </a>
+                    <a href="{% url 'delete_roombooking' book.id %}">
+                        <button type="submit" class="btn btn-primary mt-2">Delete</button>
+                    </a>
+                    {% endif %}
+                </div>
+                
             </div>
-            <div class="text-center">
-                {% if book.id %}
-                <a href="{% url 'edit_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2"> Edit </button>
-                </a>
-                <a href="{% url 'delete_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2">Delete</button>
-                </a>
-                {% endif %}
-            </div>
-            
-        </div>
-    </a>
+        </a>
+
     {% endif %}
     {% endfor %}
 </div>

@@ -245,6 +245,10 @@ a.img-container:hover {
     background: center 75% / cover no-repeat;
   }
 
+#msg {
+    position: relation;
+}
+
 /* welcome */
 
 .text-center.page-header {
