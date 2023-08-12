@@ -21,12 +21,16 @@
           <li class="nav-item">
             <a class="nav-link {% if url_name == 'room_list' %}active{% endif %}" href="{% url 'room_list' %}">Rooms</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'room_bookinglist' %}active{% endif %}" href="{% url 'room_bookinglist' %}">Booking</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'booking_form' %}active{% endif %}" href="{% url 'booking_form' %}">Form</a>
-          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Bookings
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="nav-link {% if url_name == 'room_bookinglist' %}active{% endif %}" href="{% url 'room_bookinglist' %}">Manage Booking</a></li>
+                <li><a class="nav-link {% if url_name == 'booking_form' %}active{% endif %}" href="{% url 'booking_form' %}">Make Booking</a></li>                       
+            </ul>
+        </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/">Logout</a>
