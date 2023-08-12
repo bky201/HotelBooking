@@ -1,6 +1,6 @@
 conf/
 settings.txt
-# staticfiles/
+staticfiles/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
