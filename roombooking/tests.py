@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Room, Booking
@@ -15,8 +16,17 @@ class TestViews(TestCase):
         self.user = user_model.objects.create_user(
             username=username,
             password=password,
-            is_superuser=True,
-            is_staff=True
+            is_superuser=True
         )
         logged_in = self.client.login(username=username, password=password)
         self.assertTrue(logged_in)
+
+        # Create a Room
+        room = Room.objects.create(title='King Room', number=10)
+        # Create Booking
+        booking = Booking.objects.create(
+            user=self.user,
+            room=room,
+            check_in=datetime.now().date(),
+            check_out=datetime.now().date() + timedelta(days=3)
+        )
