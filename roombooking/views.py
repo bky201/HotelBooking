@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
 from .models import Room, Booking
 from .forms import BookForm
+from django.db.models import Q
 
 
 class RoomList(ListView):
@@ -21,7 +22,9 @@ class RoomList(ListView):
         if query:
             roomlist = self.model.objects.filter(
                 Q(title__icontains=query) |
-                Q(description__icontains=query)
+                Q(features__icontains=query) |
+                Q(serviceOne__icontains=query) |
+                Q(serviceTwo__icontains=query) 
             )
         else:
             roomlist = self.model.objects.all()
