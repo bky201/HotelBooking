@@ -226,7 +226,7 @@ a.img-container:hover {
 
 .home.container,
 .about.container {
-    background-color: rgba(255, 215, 0, 0.8);
+    background-color: rgba(224, 224, 222, 0.877);
 }
 
 .container.booking {
@@ -253,10 +253,16 @@ a.img-container:hover {
 
 .text-center.page-header {
     text-align: center;
-    color: yellow;
     font-weight: 700;
     font-size: 50em;
 }
+
+.white-text-with-blue-shadow {
+    text-shadow: 1px 1px 2px black,
+                 0 0 1em blue,
+                 0 0 0.2em blue;
+    color: white;
+  }
 
 .page-header {
 	height: 50vh;
