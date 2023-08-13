@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from django.utils import timezone
-from django.test import TestCase, client
+from django.test import TestCase
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 from .models import Room, Booking
 
@@ -66,11 +67,106 @@ class TestViews(TestCase):
         response = self.client.get('/roombooking/edit/1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'roombooking/edit_booking.html')
-        
+
     def test_make_booking_page(self):
         " Test create booking for superuser"
         response = self.client.get('/roombooking/booked/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'roombooking/booking_form.html')
 
-    
+    def test_delete_unauthorized(self):
+        """
+        Test logged in user cannot delete
+        other user booking 
+        """
+        user_model = get_user_model()
+        # Create new user for testing 403 errors
+        username = 'newuser'
+        password = 'newpass1'
+        user = user_model.objects.create_user(
+            username=username,
+            password=password,
+            is_superuser=False
+        )
+        logged_in = self.client.login(
+            username=username,
+            password=password
+        )
+
+        # Try to delete the booking created by bookadmin
+        booking_id = 1  
+        url = reverse('delete_roombooking', args=[booking_id])
+        self.assertTrue(logged_in)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 403)
+
+    def test_edit_unauthorized(self):
+        """
+        Test logged in user cannot edit
+        other user booking 
+        """
+        user_model = get_user_model()
+        # Create new user for testing 403 errors
+        username = 'newuser'
+        password = 'newpass1'
+        user = user_model.objects.create_user(
+            username=username,
+            password=password,
+            is_superuser=False
+        )
+        logged_in = self.client.login(
+            username=username,
+            password=password
+        )
+
+        # Try to edit the booking created by bookadmin
+        booking_id = 1  
+        url = reverse('edit_roombooking', args=[booking_id])
+        self.assertTrue(logged_in)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 403)
+
+
+class TestRedirectViews(TestCase):
+    """Test views when user is not logged in"""
+    def test_manage_booking_auth_redirect(self):
+        """ Test redirect on manage booking page """
+        response = self.client.get('/roombooking/book/')
+        self.assertEqual(response.status_code, 302)
+    def test_create_booking_auth_redirect(self):
+        """ Test redirect on make booking page """
+        response = self.client.get('/roombooking/booked/')
+        self.assertEqual(response.status_code, 302)
+    def test_delete_booking(self):
+        """ Test redirect on delete booking """
+        response = self.client.get('/roombooking/delete/1/')
+        self.assertEqual(response.status_code, 302)
+    def test_edit_booking(self):
+        """ Test redirect on edit booking page """
+        response = self.client.get('/roombooking/edit/1/')
+        self.assertEqual(response.status_code, 302)
+
+class TestUnsecuredViews(TestCase):
+    def setUp(self):
+        """ Setup test """
+        # Create a Room
+        self.image_path = 'static/images/img4.jpg'
+        self.imagOne_path = 'static/images/img1.jpg'
+        self.imagTwo_path = 'static/images/img2.jpg'
+        room = Room.objects.create(
+            title='Single-bedroom', 
+            image=self.image_path,
+            imageOne = self.imagOne_path,
+            imageTwo = self.imagTwo_path, 
+            number=10)
+    """ Test views no auth required """
+    def test_room_view(self):
+        """ Test rooms view """
+        response = self.client.get('/roombooking/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/room_list.html')
+    def test_room_detail_page(self):
+        """ Test room detail page renders correct page """
+        response = self.client.get('/roombooking/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/room_detail.html')
