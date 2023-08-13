@@ -72,12 +72,8 @@ INSTALLED_APPS = [
     # Other
     'crispy_forms',
     'crispy_bootstrap5',
-    'djrichtextfield',
-
-    
-    
+    'djrichtextfield',  
 ]
-
 SITE_ID = 1
 
 LOGIN_REDIRECT = '/'
