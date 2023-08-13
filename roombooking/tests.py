@@ -19,12 +19,19 @@ class TestViews(TestCase):
             password=password,
             is_superuser=True
         )
-        self.image_path = 'static/images/img4.jpg'
         logged_in = self.client.login(username=username, password=password)
         self.assertTrue(logged_in)
 
         # Create a Room
-        room = Room.objects.create(title='Single-bedroom', image=self.image_path, number=10)
+        self.image_path = 'static/images/img4.jpg'
+        self.imagOne_path = 'static/images/img1.jpg'
+        self.imagTwo_path = 'static/images/img2.jpg'
+        room = Room.objects.create(
+            title='Single-bedroom', 
+            image=self.image_path,
+            imageOne = self.imagOne_path,
+            imageTwo = self.imagTwo_path, 
+            number=10)
         aware_check_in = timezone.localtime()
         aware_check_out = aware_check_in + timedelta(days=1)
 
@@ -41,3 +48,14 @@ class TestViews(TestCase):
         response=self.client.get('/roombooking/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'roombooking/room_list.html')
+
+    def test_booking_list(self):
+        """ Test Manage Booking """
+        response = self.client.get('/roombooking/book/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/room_booking.html')
+
+    def test_booking_detail_page(self):
+        response = self.client.get('/roombooking/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/room_detail.html')
