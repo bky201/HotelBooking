@@ -285,6 +285,11 @@ a.img-container:hover {
     top: 60%;
 }
 
+/* Map */
+#location {
+    width: 100%;
+  }
+
 @media screen and (min-width:40em) {
     
     .form {
