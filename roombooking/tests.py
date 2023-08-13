@@ -56,6 +56,21 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'roombooking/room_booking.html')
 
     def test_booking_detail_page(self):
+        " Test Room Details "
         response = self.client.get('/roombooking/1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'roombooking/room_detail.html')
+
+    def test_edit_booking_page(self):
+        " Test edit booking for superuser"
+        response = self.client.get('/roombooking/edit/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/edit_booking.html')
+        
+    def test_make_booking_page(self):
+        " Test create booking for superuser"
+        response = self.client.get('/roombooking/booked/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/booking_form.html')
+
+    
