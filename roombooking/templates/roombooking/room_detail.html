@@ -6,49 +6,49 @@
 
 {% block content %}
 
-    <div class="container booking">
-        <div class="roomdetail-info mt-3 p-1">
-            <div class="card m-1">
-                <a href="{{ roomdetail.image.url }}" target="_blank" aria-label="Click to view the image">
-                    <img src="{{ roomdetail.image.url }}" alt="{{ roomdetail.image_alt }}" class="roomdetail-pic">
-                </a>
-            </div>
-            <div class="card m-1">
-                <a href="{{ roomdetail.imageOne.url }}" target="_blank" aria-label="Click to view the image">
-                    <img src="{{ roomdetail.imageOne.url }}" alt="{{ roomdetail.imageOne_alt }}" class="roomdetail-pic">
-                </a>
-            </div>
-            <div class="card m-1">
-                <a href="{{ roomdetail.imageTwo.url }}" target="_blank" aria-label="Click to view the image">
-                    <img src="{{ roomdetail.imageTwo.url }}" alt="{{ roomdetail.imageTwo_alt }}" class="roomdetail-pic">
-                </a>
-            </div>
+<div class="container booking">
+    <div class="roomdetail-info mt-3 p-1">
+        <div class="card m-1">
+            <a href="{{ roomdetail.image.url }}" target="_blank" aria-label="Click to view the image">
+                <img src="{{ roomdetail.image.url }}" alt="{{ roomdetail.image_alt }}" class="roomdetail-pic">
+            </a>
+        </div>
+        <div class="card m-1">
+            <a href="{{ roomdetail.imageOne.url }}" target="_blank" aria-label="Click to view the image">
+                <img src="{{ roomdetail.imageOne.url }}" alt="{{ roomdetail.imageOne_alt }}" class="roomdetail-pic">
+            </a>
+        </div>
+        <div class="card m-1">
+            <a href="{{ roomdetail.imageTwo.url }}" target="_blank" aria-label="Click to view the image">
+                <img src="{{ roomdetail.imageTwo.url }}" alt="{{ roomdetail.imageTwo_alt }}" class="roomdetail-pic">
+            </a>
         </div>
     </div>
-    <div class="container">
-        <div class="roomdetail-info mt-3 p-1">
-            <div class="room-detail">
-              <h1 class="text-center">{{ roomdetail.title }}</h1>  
-              <p class="text-center">Detail of {{ roomdetail.title }}</p>
-              <hr/>
-              <div class="row">
+</div>
+<div class="container">
+    <div class="roomdetail-info mt-3 p-1">
+        <div class="room-detail">
+            <h1 class="text-center">{{ roomdetail.title }}</h1>
+            <p class="text-center">Detail of {{ roomdetail.title }}</p>
+            <hr />
+            <div class="row">
                 <div class="col-6">
                     <p class="p-2"><strong>{{ roomdetail.features|safe }}</strong></p>
                     <p class="p-2"><strong>{{ roomdetail.size }}</strong></p>
                     <p class="p-2"><strong>Bed: </strong> {{ roomdetail.beds }}</p>
                 </div>
                 <div class="col-6">
-                      <h3 class="p-2">Service</h3>
-                      <p class="p-2">{{roomdetail.serviceOne|safe}} </p>
-                      <p class="p-2">{{roomdetail.serviceTwo|safe}}</p>
+                    <h3 class="p-2">Service</h3>
+                    <p class="p-2">{{roomdetail.serviceOne|safe}} </p>
+                    <p class="p-2">{{roomdetail.serviceTwo|safe}}</p>
                 </div>
-              </div>
-              <div class="text-center">
+            </div>
+            <div class="text-center">
                 <a href="{% url 'booking_form' %}">
                     <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
                 </a>
-            </div>  
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
