@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('about/', include('about.urls')),
     path('roombooking/', include('roombooking.urls')),
+    path('profiles/', include('profiles.urls')),
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

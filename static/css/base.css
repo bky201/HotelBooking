@@ -286,10 +286,38 @@ a.img-container:hover {
     top: 60%;
 }
 
+/* Profiles */
+
+.profile-img {
+    width: 280px;
+    margin: 0 auto;
+}
+
+.profile-img img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-roombooking {
+    width: 100%;
+}
+
 /* Map */
 #location {
     width: 100%;
   }
+
 
 @media screen and (min-width:40em) {
     
@@ -338,5 +366,18 @@ a.img-container:hover {
 
     .instructions {
         width: 66.66%;
+    }
+    .profile {
+        flex-direction: row;
+    }
+    .info {
+        width: 30%;
+    }
+    .profile-roombooking {
+        width: 70%;
+        padding: 1.4rem 2.8rem;
+    }
+    .profile-roombooking a {
+        text-decoration: none;
     }
 }

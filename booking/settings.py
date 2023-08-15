@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'roombooking',
     'home',
     'about',
+    'profiles',
     
 
     # Other

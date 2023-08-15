@@ -77,10 +77,11 @@ class Room(models.Model):
         return f"{self.title} No-{self.number} with {self.beds} bed/s and {self.features} features"
     
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="booking_owner", on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in = models.DateTimeField(default=timezone.now)
     check_out = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-check_in"]
