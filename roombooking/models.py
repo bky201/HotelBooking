@@ -68,7 +68,7 @@ class Room(models.Model):
         force_format="WEBP",
         null=True,
     )
-    rating = models.ManyToManyField(User, related_name="room_rate", blank=True)
+    
 
     class Meta:
         ordering = ["number"]
@@ -88,6 +88,20 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"(self.user) booked (self.room)"
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, blank=True)
+    review = models.TextField(max_length=1500, null=True, blank=True)
+    rating = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.title)
+
 
 class About(models.Model):
     """

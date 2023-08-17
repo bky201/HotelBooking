@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'djrichtextfield',  
 ]
+
 SITE_ID = 1
 
 LOGIN_REDIRECT = '/'

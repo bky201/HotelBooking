@@ -2,11 +2,15 @@
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.http import HttpResponse
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
-from .models import Room, Booking
-from .forms import BookForm
+from .models import Room, Booking, Review
+from .forms import BookForm, ReviewForm
 from django.db.models import Q
 
 
@@ -137,4 +141,34 @@ class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user == self.get_object().user
 
+
+class BookingReviews(LoginRequiredMixin, CreateView):
+
+    """Create booking"""
+    def post(self, request, room_id, *args, **kwargs):
+        user = self.request.user
+        room = get_object_or_404(Room, id=room_id)
+        review_exists = Review.objects.filter(user=user, room=room).exists()
+
+        form = ReviewForm(request.POST)  # Initialize the form with POST data
+
+        if form.is_valid():
+            rating = form.cleaned_data['rating']
+            title = form.cleaned_data['title']
+            review = form.cleaned_data['review']
+            
+            if review_exists:
+                existing_review = get_object_or_404(Review, user=user, room=room)
+                existing_review.rating = rating
+                existing_review.title = title
+                existing_review.review = review  
+                existing_review.save()
+                messages.success(request, 'Review for room updated successfully.')
+            else:
+                review = Review.objects.create(user=user, title=title, room=room, review=review, rating=rating)
+                messages.success(request, 'Review for room created successfully.')
+        else:
+            messages.error(request, 'Form data is not valid.')
+
+        return redirect(request.META.get('HTTP_REFERER'))
 

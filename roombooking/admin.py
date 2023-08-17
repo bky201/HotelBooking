@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room, Booking, About
+from .models import Room, Booking, About, Review
 
 
 @admin.register(About)
@@ -26,4 +26,8 @@ class RoomAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", "number")}
     list_filter = ("title", )
 
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
 
+    list_display = ("user", "room", "rating", "review","created_at")
+    search_fields = ["user", "room", "rating", "created_at"]

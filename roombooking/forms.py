@@ -1,7 +1,7 @@
 from django import forms
 
 # from djrichtextfield.widgets import RichTextWidget
-from .models import Booking
+from .models import Booking, Review
 
 
 class BookForm(forms.ModelForm):
@@ -16,4 +16,17 @@ class BookForm(forms.ModelForm):
             "room": "Room title",
             "check_in": "Booking start date",
             "check_out": "Booking end date",
+        }
+
+class ReviewForm(forms.ModelForm):
+    """Form to create a review"""
+
+    class Meta:
+        model = Review
+        fields = ['rating', 'title', 'review']
+
+        labels = {
+            "rating": "User star rating",
+            "title": "Review title",
+            "review": "User review",
         }

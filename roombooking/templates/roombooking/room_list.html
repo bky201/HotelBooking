@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load mathfilters %}
+
 {% load static %}
 
 {% block title %}Rooms{% endblock %}
@@ -21,18 +23,18 @@
                 <!-- Rating star -->
                 {% if request.user.is_authenticated %}
                 <div class="rating">
-                    {% for i in '12345' %}
-                        <input type="radio" name="rating_{{ room.id }}" value="{{ i }}" id="{{ room.id }}_{{ i }}">
-                        <label for="{{ room.id }}_{{ i }}">☆</label>
-                    {% endfor %}
+                    <input type="radio" name="rating" value="5" id="rating_5" required><label for="rating_5" title="5"></label>
+                    <input type="radio" name="rating" value="4.5" id="rating_4_5" required><label for="rating_4_5" title="4.5" class="half"></label>
+                    <input type="radio" name="rating" value="4" id="rating_4" required><label for="rating_4" title="4"></label>
+                    <input type="radio" name="rating" value="3.5" id="rating_3_5" required><label for="rating_3_5" title="3.5" class="half"></label>
+                    <input type="radio" name="rating" value="3" id="rating_3" required><label for="rating_3" title="3"></label>
+                    <input type="radio" name="rating" value="2.5" id="rating_2_5" required><label for="rating_2_5" title="2.5" class="half"></label>
+                    <input type="radio" name="rating" value="2" id="rating_2" required><label for="rating_2" title="2"></label>
+                    <input type="radio" name="rating" value="1.5" id="rating_1_5" required><label for="rating_1_5" title="1.5" class="half"></label>
+                    <input type="radio" name="rating" value="1" id="rating_1" required><label for="rating_1" title="1"></label>
+                    <input type="radio" name="rating" value="0.5" id="rating_0_5" required><label for="rating_0_5" title="0.5" class="half"></label>
                 </div>
-                {% else %}
-                <div class="rating">
-                    {% for i in '12345' %}
-                        <input type="radio" name="rating_{{ room.id }}" value="{{ i }}" id="{{ room.id }}_{{ i }}" disabled>
-                        <label for="{{ room.id }}_{{ i }}" aria-disabled="">☆</label>
-                    {% endfor %}
-                </div>
+                <br>
                 {% endif %}
             </div>
         </div>

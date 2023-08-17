@@ -129,36 +129,51 @@ div.rating {
     width: fit-content;
     height: fit-content;
 }
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-}
 .rating > input{
-     display:none;
+    display:none;
 }
+.rating {
+    display: inline-block;
+    border: 0;
+}
+
 .rating > label {
-    position: relative;
-    width: 2rem;
-    font-size: 2vw;
-    color: hwb(51 7% 15%);
-    cursor: pointer;
-    margin-right: 0.12rem;
+    float: right;
 }
+/* display star rating */
+
 .rating > label::before{
-    content: "\2605";
+    display: inline-block;
+    font-size: 1.2rem;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin: 0;
+    padding: 0.3rem 0.2rem;
+    cursor: pointer;
+}
+
+.rating .half::before {
+    content: "\f005";
     position: absolute;
-    opacity: 0;
-    }
-.rating > label:hover:before,
+    padding-right: 0;
+}
+
+/* .rating > label:hover:before,
 .rating > label:hover ~ label:before {
     opacity: 1 !important;
+    } */
+
+input:checked ~ label, label:hover ~ label{
+    color: gold;
     }
-.rating > input:checked ~ label:before{
-    opacity:1;
-    }
-.rating:hover > input:checked ~ label:before{
-    opacity: 0.4;
-     }
+
+/* Style labels when radio input is checked and when hovering */
+input:checked + label:hover,
+input:checked ~ label:hover,
+input:checked ~ label:hover ~ label,
+label:hover ~ input:checked ~ label {
+    color: rgb(236, 174, 58);
+}
 
 /* room_detail */
 .roomdetail-info {
@@ -311,6 +326,12 @@ a.img-container:hover {
 
 .profile-roombooking {
     width: 100%;
+}
+
+/* review */
+.review-img img {
+    border-radius: 8px;
+    width: 2rem;
 }
 
 /* Map */
