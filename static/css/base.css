@@ -340,6 +340,28 @@ a.img-container:hover {
   }
 
 
+/* toggle-content */
+.hidden {
+    display: none;
+}
+
+#toggleButton {
+    color: blue;
+    cursor: pointer;
+}
+
+/* star rating */
+.star {
+    color: yellow;
+    font-size: 1.2em;
+}
+
+.star-empty {
+    color: gray;
+}
+
+
+
 @media screen and (min-width:40em) {
     
     .form {

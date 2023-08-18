@@ -1,58 +1,62 @@
 {% extends "base.html" %}
 
+{% load star_rating %}
+
 {% load static %}
 
-{% block title %} Room Detail - {{roomdetail.title}}{% endblock %}
-
+{% block title %} Room Detail - {{roomd.title}}{% endblock %}
 
 {% block content %}
 <div id="msg">
     {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            </ul>
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
     {% endif %}
 </div>
 <div class="container booking">
     <div class="roomdetail-info mt-3 p-1">
         <div class="card m-1">
-            <a href="{{ roomdetail.image.url }}" target="_blank" aria-label="Click to view the image">
-                <img src="{{ roomdetail.image.url }}" alt="{{ roomdetail.image_alt }}" class="roomdetail-pic">
+            <a href="{{ room.image.url }}" target="_blank" aria-label="Click to view the image">
+                <img src="{{ room.image.url }}" alt="{{ room.image_alt }}" class="roomdetail-pic">
             </a>
         </div>
         <div class="card m-1">
-            <a href="{{ roomdetail.imageOne.url }}" target="_blank" aria-label="Click to view the image">
-                <img src="{{ roomdetail.imageOne.url }}" alt="{{ roomdetail.imageOne_alt }}" class="roomdetail-pic">
+            <a href="{{ room.imageOne.url }}" target="_blank" aria-label="Click to view the image">
+                <img src="{{ room.imageOne.url }}" alt="{{ room.imageOne_alt }}" class="roomdetail-pic">
             </a>
         </div>
         <div class="card m-1">
-            <a href="{{ roomdetail.imageTwo.url }}" target="_blank" aria-label="Click to view the image">
-                <img src="{{ roomdetail.imageTwo.url }}" alt="{{ roomdetail.imageTwo_alt }}" class="roomdetail-pic">
+            <a href="{{ room.imageTwo.url }}" target="_blank" aria-label="Click to view the image">
+                <img src="{{ room.imageTwo.url }}" alt="{{ room.imageTwo_alt }}" class="roomdetail-pic">
             </a>
         </div>
     </div>
 </div>
+
+
+
 <div class="container">
     <div class="roomdetail-info mt-3 p-1">
         <div class="room-detail">
-            <h1 class="text-center">{{ roomdetail.title }}</h1>
-            <p class="text-center">Detail of {{ roomdetail.title }}</p>
+            <h1 class="text-center">{{ room.title }}</h1>
+            <p class="text-center">Detail of {{ room.title }}</p>
             <hr />
             <div class="row">
                 <div class="col-6">
-                    <p class="p-2"><strong>{{ roomdetail.features|safe }}</strong></p>
-                    <p class="p-2"><strong>{{ roomdetail.size }}</strong></p>
-                    <p class="p-2"><strong>Bed: </strong> {{ roomdetail.beds }}</p>
+                    <p class="p-2"><strong>{{ room.features|safe }}</strong></p>
+                    <p class="p-2"><strong>{{ room.size }}</strong></p>
+                    <p class="p-2"><strong>Bed: </strong> {{ room.beds }}</p>
                 </div>
                 <div class="col-6">
                     <h3 class="p-2">Service</h3>
-                    <p class="p-2">{{roomdetail.serviceOne|safe}} </p>
-                    <p class="p-2">{{roomdetail.serviceTwo|safe}}</p>
+                    <p class="p-2">{{room.serviceOne|safe}} </p>
+                    <p class="p-2">{{room.serviceTwo|safe}}</p>
                 </div>
             </div>
             <div class="text-center">
@@ -63,11 +67,15 @@
         </div>
     </div>
 </div>
+
+
+
 <br>
+
+
 <div class="container d-flex flex-row flex-wrap">
-    <form action="{% url 'reviews' roomdetail.id %}" method="POST" style="width: 100%;">
+    <form action="{% url 'room_detail' room.id %}" method="POST" style="width: 45rem;">
         {% csrf_token %}
-        {{ form.media }}
         {{ form|crispy }}
         <h5>Write A Review</h5>
         <p>How do you rate our room booking service?</p>
@@ -76,24 +84,34 @@
             <label>Rating: </label>
             <br>
             <div class="rating">
-                <input type="radio" name="rating" value="5" id="rating_5" required><label for="rating_5" title="5"></label>
-                <input type="radio" name="rating" value="4.5" id="rating_4_5" required><label for="rating_4_5" title="4.5" class="half"></label>
-                <input type="radio" name="rating" value="4" id="rating_4" required><label for="rating_4" title="4"></label>
-                <input type="radio" name="rating" value="3.5" id="rating_3_5" required><label for="rating_3_5" title="3.5" class="half"></label>
-                <input type="radio" name="rating" value="3" id="rating_3" required><label for="rating_3" title="3"></label>
-                <input type="radio" name="rating" value="2.5" id="rating_2_5" required><label for="rating_2_5" title="2.5" class="half"></label>
-                <input type="radio" name="rating" value="2" id="rating_2" required><label for="rating_2" title="2"></label>
-                <input type="radio" name="rating" value="1.5" id="rating_1_5" required><label for="rating_1_5" title="1.5" class="half"></label>
-                <input type="radio" name="rating" value="1" id="rating_1" required><label for="rating_1" title="1"></label>
-                <input type="radio" name="rating" value="0.5" id="rating_0_5" required><label for="rating_0_5" title="0.5" class="half"></label>
+                <input type="radio" name="rating" value="5" id="rating_5" required><label for="rating_5"
+                    title="5"></label>
+                <input type="radio" name="rating" value="4.5" id="rating_4_5" required><label for="rating_4_5"
+                    title="4.5" class="half"></label>
+                <input type="radio" name="rating" value="4" id="rating_4" required><label for="rating_4"
+                    title="4"></label>
+                <input type="radio" name="rating" value="3.5" id="rating_3_5" required><label for="rating_3_5"
+                    title="3.5" class="half"></label>
+                <input type="radio" name="rating" value="3" id="rating_3" required><label for="rating_3"
+                    title="3"></label>
+                <input type="radio" name="rating" value="2.5" id="rating_2_5" required><label for="rating_2_5"
+                    title="2.5" class="half"></label>
+                <input type="radio" name="rating" value="2" id="rating_2" required><label for="rating_2"
+                    title="2"></label>
+                <input type="radio" name="rating" value="1.5" id="rating_1_5" required><label for="rating_1_5"
+                    title="1.5" class="half"></label>
+                <input type="radio" name="rating" value="1" id="rating_1" required><label for="rating_1"
+                    title="1"></label>
+                <input type="radio" name="rating" value="0.5" id="rating_0_5" required><label for="rating_0_5"
+                    title="0.5" class="half"></label>
             </div>
-            
+
             <br>
             Review Title:
-            <input type="text" class="form-control" name="subject">
+            <input type="text" class="form-control" name="title">
             <br>
             Review:
-            <textarea name="review" rows="4" class="form-control"></textarea>
+            <textarea name="comment" rows="4" class="form-control"></textarea>
             <br>
             {% if user.is_authenticated %}
             <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
@@ -103,34 +121,39 @@
         </div>
     </form>
 </div>
+
+
+
 <br>
+
+
 <div class="container d-flex flex-row flex-wrap">
-    <header class="section-heading">
-        <h3>Customer Review</h3>
-    </header>
+    <h3>Customer Review</h3>
+</div>
+
+<div class="container d-flex flex-row flex-wrap justify-content-centerw">
         <div class="card m-3">
             <div class="card-body">
-                <!-- Rating star -->
-                <article class="box mb-3">
-                    <div class="review-img w-100">
-                        {% if profile.image.url is not none %}
-                        <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
-                        {% else %}
-                        <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
-                        {% endif %}
-                        <div class="text">
-                            <span class="date text-muted float-md-right">16.08.2023</span>
-                            <h6 class="mb1">James Jack</h6>
-                        </div>
+                <div class="review-img w-100">
+                    {% if profile.image.url is not none %}
+                    <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
+                    {% else %}
+                    <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
+                    {% endif %}
+                    <div class="text">
+                        <span class="date text-muted float-md-right">{{ reviews.created_on }}</span>
+                        <h6 class="mb1">{{ reviews.user }}</h6>
                     </div>
-                    <div class="mt-3">
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </p>
-                    </div>
-                </article>
-                
+                </div>
             </div>
+            <div class="card-body">
+                <div>
+                    {{ reviews.rating|stars }}
+                </div>
+                <div>
+                    {% include 'includes/toggle_content.html' %}
+                </div>
         </div>
+    </div>
 </div>
 {% endblock %}

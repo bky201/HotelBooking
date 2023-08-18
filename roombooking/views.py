@@ -1,11 +1,10 @@
 
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.db.models import Q
+from django.views import View
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from django.http import HttpResponse
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
@@ -35,12 +34,63 @@ class RoomList(ListView):
         return roomlist
     
 
-class RoomDetail(DetailView):
+from django.shortcuts import render, redirect
+
+class RoomDetail(View):
     """View a single room"""
 
-    template_name = "roombooking/room_detail.html"
-    model = Room
-    context_object_name = "roomdetail"
+    def get(self, request, room_id, *args, **kwargs):
+        queryset = Room.objects.all()
+        room = get_object_or_404(queryset, id=room_id)
+        reviews = room.reviews.all().order_by("created_on")
+        
+        if room.reviews.filter(user=self.request.user.id).exists():
+            room.status = True
+
+        return render(
+            request,
+            "roombooking/room_detail.html",
+            {
+                "room": room,
+                "reviews": reviews,
+            },
+        )
+
+    def post(self, request, room_id, *args, **kwargs):
+        queryset = Room.objects.all()
+        room = get_object_or_404(queryset, id=room_id)
+        reviews = room.reviews.all().order_by("created_on")
+
+        review_form = ReviewForm(data=request.POST)
+
+        if review_form.is_valid():
+            review_form.instance.name = request.user.username
+            rating = review_form.cleaned_data['rating']
+            title = review_form.cleaned_data['title']
+            comment = review_form.cleaned_data['comment']
+            review_exists = reviews.filter(user=self.request.user.id).exists()
+
+            if review_exists:
+                reviews = get_object_or_404(Review, user=self.request.user, room=room)
+                reviews.rating = rating
+                reviews.title = title
+                reviews.comment = comment
+                reviews.room = room  
+                reviews.save()
+                messages.success(request, 'Review for room updated successfully.')
+            else:
+                reviews = Review.objects.create(user=request.user, rating=rating, title=title, comment=comment, room=room)
+                messages.success(request, 'Review for room created successfully.')
+
+        return render(
+            request,
+            "roombooking/room_detail.html",
+            {
+                "room": room,
+                "reviews": reviews,
+                "review_form": ReviewForm(),
+            },
+        )
 
 class RoomBookingList(LoginRequiredMixin, ListView):
     """View all booking"""
@@ -141,34 +191,4 @@ class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user == self.get_object().user
 
-
-class BookingReviews(LoginRequiredMixin, CreateView):
-
-    """Create booking"""
-    def post(self, request, room_id, *args, **kwargs):
-        user = self.request.user
-        room = get_object_or_404(Room, id=room_id)
-        review_exists = Review.objects.filter(user=user, room=room).exists()
-
-        form = ReviewForm(request.POST)  # Initialize the form with POST data
-
-        if form.is_valid():
-            rating = form.cleaned_data['rating']
-            title = form.cleaned_data['title']
-            review = form.cleaned_data['review']
-            
-            if review_exists:
-                existing_review = get_object_or_404(Review, user=user, room=room)
-                existing_review.rating = rating
-                existing_review.title = title
-                existing_review.review = review  
-                existing_review.save()
-                messages.success(request, 'Review for room updated successfully.')
-            else:
-                review = Review.objects.create(user=user, title=title, room=room, review=review, rating=rating)
-                messages.success(request, 'Review for room created successfully.')
-        else:
-            messages.error(request, 'Form data is not valid.')
-
-        return redirect(request.META.get('HTTP_REFERER'))
 

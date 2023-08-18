@@ -29,5 +29,6 @@ class RoomAdmin(admin.ModelAdmin):
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
 
-    list_display = ("user", "room", "rating", "review","created_at")
-    search_fields = ["user", "room", "rating", "created_at"]
+    list_display = ("user", "room", "rating", "title", "comment","created_on")
+    search_fields = ["user", "room", "rating", "created_on"]
+    list_filter = ("room", "rating")
