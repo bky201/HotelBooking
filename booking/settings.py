@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'djrichtextfield',  
+    'star_ratings',
 ]
 
 SITE_ID = 1
@@ -121,6 +122,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'django.template.context_processors.request',  # Added this line
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -132,6 +134,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# Rating star
+STAR_RATINGS_RERATE = True
+STAR_RATINGS_RERATE_SAME_DELETE = True
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

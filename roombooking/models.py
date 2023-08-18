@@ -74,7 +74,7 @@ class Room(models.Model):
         ordering = ["number"]
 
     def __str__(self):
-        return f"{self.title} No-{self.number} with {self.beds} bed/s and {self.features} features"
+        return f"{self.title} Room no.-{self.number}"
     
 class Booking(models.Model):
     user = models.ForeignKey(User, related_name="booking_owner", on_delete=models.CASCADE)
@@ -94,7 +94,7 @@ class Review(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="reviews")
     title = models.CharField(max_length=150, blank=True)
     comment = models.TextField(max_length=1500, null=True, blank=True)
-    rating = models.FloatField()
+    rating = models.FloatField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

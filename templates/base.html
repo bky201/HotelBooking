@@ -12,10 +12,14 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!-- fontawsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- rating -->
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     {% endblock %}
 
     {% block postload_js %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- rating -->
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
     {% endblock %}
     <title>Hotel Room Booking - {% block title %} {% endblock %}</title>
     {{ form.media.js }}
@@ -34,5 +38,6 @@
     {% block extra_js %}
 
     {% endblock %}
+
 </body>
 </html>

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% load star_rating %}
-
 {% load static %}
 
-{% block title %} Room Detail - {{roomd.title}}{% endblock %}
+{% load ratings %}
+
+{% block title %} Room Detail - {{room.title}}{% endblock %}
 
 {% block content %}
 <div id="msg">
@@ -19,6 +19,7 @@
     </ul>
     {% endif %}
 </div>
+
 <div class="container booking">
     <div class="roomdetail-info mt-3 p-1">
         <div class="card m-1">
@@ -68,12 +69,9 @@
     </div>
 </div>
 
-
-
 <br>
-
-
 <div class="container d-flex flex-row flex-wrap">
+    {% if user_booked %}
     <form action="{% url 'room_detail' room.id %}" method="POST" style="width: 45rem;">
         {% csrf_token %}
         {{ form|crispy }}
@@ -84,26 +82,7 @@
             <label>Rating: </label>
             <br>
             <div class="rating">
-                <input type="radio" name="rating" value="5" id="rating_5" required><label for="rating_5"
-                    title="5"></label>
-                <input type="radio" name="rating" value="4.5" id="rating_4_5" required><label for="rating_4_5"
-                    title="4.5" class="half"></label>
-                <input type="radio" name="rating" value="4" id="rating_4" required><label for="rating_4"
-                    title="4"></label>
-                <input type="radio" name="rating" value="3.5" id="rating_3_5" required><label for="rating_3_5"
-                    title="3.5" class="half"></label>
-                <input type="radio" name="rating" value="3" id="rating_3" required><label for="rating_3"
-                    title="3"></label>
-                <input type="radio" name="rating" value="2.5" id="rating_2_5" required><label for="rating_2_5"
-                    title="2.5" class="half"></label>
-                <input type="radio" name="rating" value="2" id="rating_2" required><label for="rating_2"
-                    title="2"></label>
-                <input type="radio" name="rating" value="1.5" id="rating_1_5" required><label for="rating_1_5"
-                    title="1.5" class="half"></label>
-                <input type="radio" name="rating" value="1" id="rating_1" required><label for="rating_1"
-                    title="1"></label>
-                <input type="radio" name="rating" value="0.5" id="rating_0_5" required><label for="rating_0_5"
-                    title="0.5" class="half"></label>
+                {% ratings room %}
             </div>
 
             <br>
@@ -113,47 +92,46 @@
             Review:
             <textarea name="comment" rows="4" class="form-control"></textarea>
             <br>
-            {% if user.is_authenticated %}
             <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
-            {% else %}
-            <p>You have to login to post a review. <span><a href="/accounts/login/">Login Now</a></span></p>
-            {% endif %}
         </div>
     </form>
+    {% else %}
+                <p>You haven't booked this room. <span><a href="{% url 'booking_form' %}">Book Now</a></span></p>
+    {% endif %}
 </div>
-
-
-
 <br>
-
 
 <div class="container d-flex flex-row flex-wrap">
     <h3>Customer Review</h3>
 </div>
-
 <div class="container d-flex flex-row flex-wrap justify-content-centerw">
-        <div class="card m-3">
-            <div class="card-body">
-                <div class="review-img w-100">
-                    {% if profile.image.url is not none %}
-                    <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
-                    {% else %}
-                    <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
-                    {% endif %}
-                    <div class="text">
-                        <span class="date text-muted float-md-right">{{ reviews.created_on }}</span>
-                        <h6 class="mb1">{{ reviews.user }}</h6>
-                    </div>
+    {% for review in reviews %}
+    <div class="card m-3">
+        <div class="card-body">
+            <div class="review-img w-100">
+                {% if profile.image.url is not none %}
+                <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
+                {% else %}
+                <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
+                {% endif %}
+                <div class="text">
+                    <span class="date text-muted float-md-right">{{ review.created_on }}</span>
+                    <h6 class="mb1">{{ review.user }}</h6>
                 </div>
             </div>
-            <div class="card-body">
-                <div>
-                    {{ reviews.rating|stars }}
-                </div>
-                <div>
-                    {% include 'includes/toggle_content.html' %}
-                </div>
+        </div>
+        <div class="card-body">
+            <div>
+                {% ratings review %}
+            </div>
+            <div>
+                {{ review.title }}
+            </div>
+            <div>
+                {{ review.comment|slice:"100:" }}
+            </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}

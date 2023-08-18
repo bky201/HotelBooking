@@ -34,18 +34,15 @@ class RoomList(ListView):
         return roomlist
     
 
-from django.shortcuts import render, redirect
-
 class RoomDetail(View):
-    """View a single room"""
+    """ View a single room """
 
     def get(self, request, room_id, *args, **kwargs):
         queryset = Room.objects.all()
         room = get_object_or_404(queryset, id=room_id)
-        reviews = room.reviews.all().order_by("created_on")
-        
-        if room.reviews.filter(user=self.request.user.id).exists():
-            room.status = True
+        reviews = Review.objects.filter(user=request.user.id, room=room).order_by("created_on")
+
+        user_booked = Booking.objects.filter(user=request.user.id, room=room).exists()
 
         return render(
             request,
@@ -53,34 +50,37 @@ class RoomDetail(View):
             {
                 "room": room,
                 "reviews": reviews,
+                "user_booked": user_booked,
             },
         )
 
     def post(self, request, room_id, *args, **kwargs):
         queryset = Room.objects.all()
         room = get_object_or_404(queryset, id=room_id)
-        reviews = room.reviews.all().order_by("created_on")
+        reviews = Review.objects.all().order_by("created_on")
 
         review_form = ReviewForm(data=request.POST)
 
         if review_form.is_valid():
-            review_form.instance.name = request.user.username
             rating = review_form.cleaned_data['rating']
             title = review_form.cleaned_data['title']
             comment = review_form.cleaned_data['comment']
-            review_exists = reviews.filter(user=self.request.user.id).exists()
 
-            if review_exists:
-                reviews = get_object_or_404(Review, user=self.request.user, room=room)
-                reviews.rating = rating
-                reviews.title = title
-                reviews.comment = comment
-                reviews.room = room  
-                reviews.save()
+            # Check if the user's review exists
+            user_review = Review.objects.filter(user=request.user.id, room=room).exists()
+
+            if user_review:
+                user_review.rating = rating
+                user_review.title = title
+                user_review.comment = comment
+                user_review.save()
                 messages.success(request, 'Review for room updated successfully.')
             else:
-                reviews = Review.objects.create(user=request.user, rating=rating, title=title, comment=comment, room=room)
+                Review.objects.create(user=request.user, rating=rating, title=title, comment=comment, room=room)
                 messages.success(request, 'Review for room created successfully.')
+
+            # Redirect to the room detail page after submitting the review
+            return redirect('room_detail', room_id=room_id)
 
         return render(
             request,
@@ -88,7 +88,9 @@ class RoomDetail(View):
             {
                 "room": room,
                 "reviews": reviews,
-                "review_form": ReviewForm(),
+                "user_review": Review.objects.filter(user=request.user.id, room=room).exists(),
+                "review_form": review_form,
+                "user_booked": Booking.objects.filter(user=request.user.id, room=room).exists(),
             },
         )
 

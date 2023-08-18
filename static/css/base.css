@@ -345,7 +345,7 @@ a.img-container:hover {
     display: none;
 }
 
-#toggleButton {
+.toggleButton {
     color: blue;
     cursor: pointer;
 }

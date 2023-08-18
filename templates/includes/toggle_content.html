@@ -1,13 +1,12 @@
 <div class="content">
-    <span class="truncated">{{ reviews.comment|safe|slice:":100" }}</span>
-    <span class="full hidden">{{ reviews.comment|safe|slice:"100:" }}</span>
-    <span id="toggleButton">read more</span>
-    
+    <span class="truncated">{{ reviews.comment|slice:":100" }}</span>
+    <span class="full hidden">{{ reviews.comment|slice:"100:" }}</span>
+    <span class="toggleButton">Toggle </span>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var toggleButtons = document.querySelectorAll("#toggleButton");
+        var toggleButtons = document.querySelectorAll(".toggleButton");
         toggleButtons.forEach(function(button) {
             button.addEventListener("click", function() {
                 var content = button.closest(".content");
@@ -17,4 +16,3 @@
         });
     });
 </script>
-    
