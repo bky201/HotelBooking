@@ -71,6 +71,7 @@
 
 <br>
 <div class="container d-flex flex-row flex-wrap">
+    {% if request.user.is_authenticated %}
     {% if user_booked %}
     <form action="{% url 'room_detail' room.id %}" method="POST" style="width: 45rem;">
         {% csrf_token %}
@@ -97,6 +98,9 @@
     </form>
     {% else %}
                 <p>You haven't booked this room. <span><a href="{% url 'booking_form' %}">Book Now</a></span></p>
+    {% endif %}
+    {% else %}
+    <p>You haven't logged in. <span><a href="/accounts/login/">Login Now</a></span></p>
     {% endif %}
 </div>
 <br>
@@ -128,7 +132,7 @@
                 {{ review.title }}
             </div>
             <div>
-                {{ review.comment|slice:"100:" }}
+                {% include 'includes/toggle_content.html' %}
             </div>
         </div>
     </div>

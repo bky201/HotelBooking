@@ -351,13 +351,8 @@ a.img-container:hover {
 }
 
 /* star rating */
-.star {
-    color: yellow;
-    font-size: 1.2em;
-}
-
-.star-empty {
-    color: gray;
+.star-ratings .rating-widget {
+    font-size: 10px; 
 }
 
 
