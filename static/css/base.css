@@ -124,57 +124,6 @@ footer {
     cursor: pointer;
 }
 
-/* Star Rating */
-div.rating {
-    width: fit-content;
-    height: fit-content;
-}
-.rating > input{
-    display:none;
-}
-.rating {
-    display: inline-block;
-    border: 0;
-}
-
-.rating > label {
-    float: right;
-}
-/* display star rating */
-
-.rating > label::before{
-    display: inline-block;
-    font-size: 1.2rem;
-    font-family: FontAwesome;
-    content: "\f005";
-    margin: 0;
-    padding: 0.3rem 0.2rem;
-    cursor: pointer;
-}
-
-.rating .half::before {
-    content: "\f005";
-    position: absolute;
-    padding-right: 0;
-}
-
-/* .rating > label:hover:before,
-.rating > label:hover ~ label:before {
-    opacity: 1 !important;
-    } */
-
-input:checked ~ label, label:hover ~ label{
-    color: gold;
-    }
-
-/* Style labels when radio input is checked and when hovering */
-input:checked + label:hover,
-input:checked ~ label:hover,
-input:checked ~ label:hover ~ label,
-label:hover ~ input:checked ~ label {
-    color: rgb(236, 174, 58);
-}
-
 /* room_detail */
 .roomdetail-info {
     display: flex;
@@ -351,10 +300,52 @@ a.img-container:hover {
 }
 
 /* star rating */
-.star-ratings .rating-widget {
-    font-size: 10px; 
+.star-rating{
+    font-size: 0;
+}
+.star-rating__wrap{
+    display: inline-block;
+    font-size: 1rem;
+}
+.star-rating__wrap:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.star-rating__ico{
+    float: right;
+    padding-left: 2px;
+    cursor: pointer;
+    color: #FFB300;
+}
+.star-rating__ico:last-child{
+    padding-left: 0;
+}
+.star-rating__input{
+    display: none;
+}
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before
+{
+    content: "\f005";
 }
 
+#star {
+    font-size: 25px; /* Adjust the size as needed */
+    color: #cccccc; /* Default star color */
+    margin-right: 3px; 
+}
+
+#filled {
+    font-size: 25px;
+    color: #FFB300; 
+}
+
+#total {
+    font-size: 25px;
+    color: black;
+}
 
 
 @media screen and (min-width:40em) {

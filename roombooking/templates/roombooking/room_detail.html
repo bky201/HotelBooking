@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% load ratings %}
+{% load custom_filters %}
 
 {% block title %} Room Detail - {{room.title}}{% endblock %}
 
@@ -82,8 +82,24 @@
             <!-- star -->
             <label>Rating: </label>
             <br>
-            <div class="rating">
-                {% ratings room %}
+            <div class="star-rating">
+                <div class="star-rating__wrap">
+                    <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5"
+                        title="5 out of 5 stars"></label>
+                    <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4"
+                        title="4 out of 5 stars"></label>
+                    <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3"
+                        title="3 out of 5 stars"></label>
+                    <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2"
+                        title="2 out of 5 stars"></label>
+                    <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+                    <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1"
+                        title="1 out of 5 stars"></label>
+                </div>
             </div>
 
             <br>
@@ -91,13 +107,13 @@
             <input type="text" class="form-control" name="title">
             <br>
             Review:
-            <textarea name="comment" rows="4" class="form-control"></textarea>
+            <textarea rows="4" class="form-control" name="comment"></textarea>
             <br>
             <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
         </div>
     </form>
     {% else %}
-                <p>You haven't booked this room. <span><a href="{% url 'booking_form' %}">Book Now</a></span></p>
+    <p>You haven't booked this room. <span><a href="{% url 'booking_form' %}">Book Now</a></span></p>
     {% endif %}
     {% else %}
     <p>You haven't logged in. <span><a href="/accounts/login/">Login Now</a></span></p>
@@ -110,8 +126,8 @@
 </div>
 <div class="container d-flex flex-row flex-wrap justify-content-centerw">
     {% for review in reviews %}
-    <div class="card m-3">
-        <div class="card-body">
+    <div class="row">
+        <div class="col-md-3">
             <div class="review-img w-100">
                 {% if profile.image.url is not none %}
                 <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
@@ -119,14 +135,20 @@
                 <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
                 {% endif %}
                 <div class="text">
-                    <span class="date text-muted float-md-right">{{ review.created_on }}</span>
-                    <h6 class="mb1">{{ review.user }}</h6>
+                    <span class="date text-muted float-md-right">{{ review.created_on|date:"F d, Y" }}</span>
+                    <h6 class="mb1">{{ review.user.username }}</h6>
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <div>
-                {% ratings review %}
+        <div class="col-md-8">
+            <div class="star-ratings">
+                {% for i in "12345" %}
+                    {% if review.rating|to_int >= i|to_int %}
+                    <span id="filled">★</span>
+                    {% else %}
+                    <span id="star">★</span>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div>
                 {{ review.title }}

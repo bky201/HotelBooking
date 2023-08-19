@@ -13,7 +13,6 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('roombooking/', include('roombooking.urls')),
     path('profiles/', include('profiles.urls')),
-    path('ratings/', include('star_ratings.urls', namespace='ratings')),
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

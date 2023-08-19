@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% load ratings %}
+{% load custom_filters %}
 
 {% block title %}Rooms{% endblock %}
 
@@ -14,16 +14,24 @@
     Room Categories
 </h1>
 <div class="container booking d-flex flex-row flex-wrap justify-content-center">
-    {% for rooml in roomlist %}
+    {% for room in roomlist %}
     <div class="card m-3" style="width: 18rem;">
-        <img src="{{rooml.image.url}}" class="card-img-top" alt="{{rooml.image_alt}}">
+        <img src="{{room.image.url}}" class="card-img-top" alt="{{room.image_alt}}">
         <div class="card-body">
-                <a href="{% url 'room_detail' rooml.id %}" class="rooms" aria-label="Click to view {{rooml.title}}">
-                <h2 class="card-title">{{ rooml.title }}</h2>
+                <a href="{% url 'room_detail' room.id %}" class="rooms" aria-label="Click to view {{room.title}}">
+                <h2 class="card-title">{{ room.title }}</h2>
                 </a>
                 <!-- Rating star -->
-                <div class="rating">
-                    {% ratings rooml %}
+                <div class="star-ratings">
+                    {% if room.average_rating %}
+                    {% for i in "12345" %}
+                        {% if room.average_rating|floatformat:"1"|to_int >= i|to_int %}
+                        <span id="filled">★</span>
+                        {% else %}
+                        <span id="star">★</span>
+                        {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <br>
             </div>

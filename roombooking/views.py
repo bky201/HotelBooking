@@ -5,6 +5,7 @@ from django.views import View
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
+from django.db.models import Avg
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
@@ -23,14 +24,18 @@ class RoomList(ListView):
     def get_queryset(self, **kwargs):
         query = self.request.GET.get('q')
         if query:
+            query = self.request.GET.get('q')
+        if query:
             roomlist = self.model.objects.filter(
                 Q(title__icontains=query) |
                 Q(features__icontains=query) |
                 Q(serviceOne__icontains=query) |
-                Q(serviceTwo__icontains=query) 
+                Q(serviceTwo__icontains=query)
             )
         else:
             roomlist = self.model.objects.all()
+
+        roomlist = roomlist.annotate(average_rating=Avg('reviewed__rating'))
         return roomlist
     
 
@@ -40,9 +45,11 @@ class RoomDetail(View):
     def get(self, request, room_id, *args, **kwargs):
         queryset = Room.objects.all()
         room = get_object_or_404(queryset, id=room_id)
-        reviews = Review.objects.filter(user=request.user.id, room=room).order_by("created_on")
+        reviews = Review.objects.filter(user=request.user.id, room_id=room_id).order_by("created_on")
 
-        user_booked = Booking.objects.filter(user=request.user.id, room=room).exists()
+        user_booked = Booking.objects.filter(user=request.user.id, room_id=room_id).exists()
+
+        average_rating = Review.objects.filter(room=room).aggregate(Avg('rating'))['rating__avg']
 
         return render(
             request,
@@ -51,13 +58,14 @@ class RoomDetail(View):
                 "room": room,
                 "reviews": reviews,
                 "user_booked": user_booked,
+                "average_rating": average_rating,
             },
         )
 
     def post(self, request, room_id, *args, **kwargs):
         queryset = Room.objects.all()
         room = get_object_or_404(queryset, id=room_id)
-        reviews = Review.objects.all().order_by("created_on")
+        reviews = Review.objects.filter(room_id=room_id).order_by("created_on")
 
         review_form = ReviewForm(data=request.POST)
 
@@ -67,16 +75,20 @@ class RoomDetail(View):
             comment = review_form.cleaned_data['comment']
 
             # Check if the user's review exists
-            user_review = Review.objects.filter(user=request.user.id, room=room).exists()
+            review_exist, created = Review.objects.get_or_create(user=request.user, room=room)
 
-            if user_review:
-                user_review.rating = rating
-                user_review.title = title
-                user_review.comment = comment
-                user_review.save()
+            if not created:
+                review_exist.rating = int(rating)
+                review_exist.title = title
+                review_exist.comment = comment
+                review_exist.save()
                 messages.success(request, 'Review for room updated successfully.')
             else:
-                Review.objects.create(user=request.user, rating=rating, title=title, comment=comment, room=room)
+                # If the review was just created, set its attributes
+                review_exist.rating = int(rating)
+                review_exist.title = title
+                review_exist.comment = comment
+                review_exist.save()
                 messages.success(request, 'Review for room created successfully.')
 
             # Redirect to the room detail page after submitting the review
@@ -88,9 +100,8 @@ class RoomDetail(View):
             {
                 "room": room,
                 "reviews": reviews,
-                "user_review": Review.objects.filter(user=request.user.id, room=room).exists(),
                 "review_form": review_form,
-                "user_booked": Booking.objects.filter(user=request.user.id, room=room).exists(),
+                "user_booked": Booking.objects.filter(user=request.user.id, room_id=room_id).exists(),
             },
         )
 
