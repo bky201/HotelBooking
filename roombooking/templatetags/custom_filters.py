@@ -7,4 +7,4 @@ def to_int(value):
     try:
         return int(value)
     except (ValueError, TypeError):
-        return 5
+        return 0

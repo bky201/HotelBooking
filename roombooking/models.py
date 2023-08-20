@@ -76,6 +76,8 @@ class Room(models.Model):
     def __str__(self):
         return f"{self.title} Room no.-{self.number}"
     
+    
+    
 class Booking(models.Model):
     user = models.ForeignKey(User, related_name="booking_owner", on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -94,7 +96,7 @@ class Review(models.Model):
     room = models.ForeignKey(Room, related_name='reviewed', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
     comment = models.TextField(max_length=1500, null=True, blank=True)
-    rating = models.PositiveIntegerField()
+    rating = models.PositiveIntegerField(default=5)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

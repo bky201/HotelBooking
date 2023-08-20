@@ -4,6 +4,8 @@
 
 {% load custom_filters %}
 
+{% load rating_filters %}
+
 {% block title %}Rooms{% endblock %}
 
 {% block content %}
@@ -23,14 +25,17 @@
                 </a>
                 <!-- Rating star -->
                 <div class="star-ratings">
-                    {% if room.average_rating %}
+                    {% with room|average_rating as avg_rating %}
                     {% for i in "12345" %}
-                        {% if room.average_rating|floatformat:"1"|to_int >= i|to_int %}
+                        {% if avg_rating|floatformat:1 >= i %}
                         <span id="filled">★</span>
                         {% else %}
                         <span id="star">★</span>
                         {% endif %}
-                        {% endfor %}
+                    {% endfor %}
+                    {% endwith %}
+                    {% if room.reviewed.count > 0 %}
+                    ({{ room.reviewed.count }})
                     {% endif %}
                 </div>
                 <br>

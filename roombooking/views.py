@@ -5,13 +5,14 @@ from django.views import View
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from django.db.models import Avg
+
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
 from .models import Room, Booking, Review
 from .forms import BookForm, ReviewForm
 from django.db.models import Q
+from django.db.models import Avg
 
 
 class RoomList(ListView):
@@ -35,7 +36,6 @@ class RoomList(ListView):
         else:
             roomlist = self.model.objects.all()
 
-        roomlist = roomlist.annotate(average_rating=Avg('reviewed__rating'))
         return roomlist
     
 
@@ -49,8 +49,6 @@ class RoomDetail(View):
 
         user_booked = Booking.objects.filter(user=request.user.id, room_id=room_id).exists()
 
-        average_rating = Review.objects.filter(room=room).aggregate(Avg('rating'))['rating__avg']
-
         return render(
             request,
             "roombooking/room_detail.html",
@@ -58,7 +56,6 @@ class RoomDetail(View):
                 "room": room,
                 "reviews": reviews,
                 "user_booked": user_booked,
-                "average_rating": average_rating,
             },
         )
 
