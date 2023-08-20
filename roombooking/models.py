@@ -46,6 +46,7 @@ class Room(models.Model):
     size = models.CharField(max_length=60, choices=SIZES, default='Room size: 30 m²/323 ft²')
     serviceOne = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
     serviceTwo = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
+    price = models.FloatField(default=0.00)
     image = ResizedImageField(
         size=[400, None],
         quality=75,
@@ -68,7 +69,6 @@ class Room(models.Model):
         force_format="WEBP",
         null=True,
     )
-    
 
     class Meta:
         ordering = ["number"]
@@ -76,14 +76,12 @@ class Room(models.Model):
     def __str__(self):
         return f"{self.title} Room no.-{self.number}"
     
-    
-    
 class Booking(models.Model):
     user = models.ForeignKey(User, related_name="booking_owner", on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in = models.DateTimeField(default=timezone.now)
     check_out = models.DateTimeField(default=timezone.now)
-    created_date = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-check_in"]
@@ -105,12 +103,6 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.title)
-    
-    def count_reviews(self):
-        return self.review.count()
-    
-    
-
 
 class About(models.Model):
     """
