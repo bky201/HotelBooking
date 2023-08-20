@@ -124,42 +124,6 @@ footer {
     cursor: pointer;
 }
 
-/* Star Rating */
-div.rating {
-    width: fit-content;
-    height: fit-content;
-}
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-}
-.rating > input{
-     display:none;
-}
-.rating > label {
-    position: relative;
-    width: 2rem;
-    font-size: 2vw;
-    color: hwb(51 7% 15%);
-    cursor: pointer;
-    margin-right: 0.12rem;
-}
-.rating > label::before{
-    content: "\2605";
-    position: absolute;
-    opacity: 0;
-    }
-.rating > label:hover:before,
-.rating > label:hover ~ label:before {
-    opacity: 1 !important;
-    }
-.rating > input:checked ~ label:before{
-    opacity:1;
-    }
-.rating:hover > input:checked ~ label:before{
-    opacity: 0.4;
-     }
-
 /* room_detail */
 .roomdetail-info {
     display: flex;
@@ -286,10 +250,103 @@ a.img-container:hover {
     top: 60%;
 }
 
+/* Profiles */
+
+.profile-img {
+    width: 280px;
+    margin: 0 auto;
+}
+
+.profile-img img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-roombooking {
+    width: 100%;
+}
+
+/* review */
+.review-img img {
+    border-radius: 8px;
+    width: 2rem;
+}
+
 /* Map */
 #location {
     width: 100%;
   }
+
+
+/* toggle-content */
+.hidden {
+    display: none;
+}
+
+.toggleButton {
+    color: blue;
+    cursor: pointer;
+}
+
+/* star rating */
+.star-rating{
+    font-size: 0;
+}
+.star-rating__wrap{
+    display: inline-block;
+    font-size: 1rem;
+}
+.star-rating__wrap:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.star-rating__ico{
+    float: right;
+    padding-left: 2px;
+    cursor: pointer;
+    color: #FFB300;
+}
+.star-rating__ico:last-child{
+    padding-left: 0;
+}
+.star-rating__input{
+    display: none;
+}
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before
+{
+    content: "\f005";
+}
+
+#star {
+    font-size: 25px; /* Adjust the size as needed */
+    color: #cccccc; /* Default star color */
+    margin-right: 3px; 
+}
+
+#filled {
+    font-size: 25px;
+    color: #FFB300; 
+}
+
+#total {
+    font-size: 25px;
+    color: black;
+}
+
 
 @media screen and (min-width:40em) {
     
@@ -338,5 +395,18 @@ a.img-container:hover {
 
     .instructions {
         width: 66.66%;
+    }
+    .profile {
+        flex-direction: row;
+    }
+    .info {
+        width: 30%;
+    }
+    .profile-roombooking {
+        width: 70%;
+        padding: 1.4rem 2.8rem;
+    }
+    .profile-roombooking a {
+        text-decoration: none;
     }
 }
