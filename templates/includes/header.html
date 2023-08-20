@@ -46,6 +46,9 @@
             <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login/">Login</a>
           </li>
           {% endif %}
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'room_review' %}active{% endif %}" href="{% url 'room_review' %}">Reviews</a>
+          </li>
         </ul>
         <!-- form for search bar -->
         <form class="d-flex" role="search" method="GET" action="{% url 'room_list' %}">

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load custom_filters %}
+
+{% block title %} Room Review {% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-row flex-wrap justify-content-centerw">
+    {% for review in reviews %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="review-img w-100">
+                {% if profile.image.url is not none %}
+                <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
+                {% else %}
+                <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
+                {% endif %}
+                <div class="text">
+                    <span class="date text-muted float-md-right">{{ review.created_on|date:"F d, Y" }}</span>
+                    <h6 class="mb1">{{ review.user.username }}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="star-ratings">
+                {% for i in "12345" %}
+                    {% if review.rating|to_int >= i|to_int %}
+                    <span id="filled">★</span>
+                    {% else %}
+                    <span id="star">★</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div>
+                {{ review.title }}
+            </div>
+            <div>
+                {% include 'includes/toggle_content.html' %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

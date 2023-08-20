@@ -124,6 +124,7 @@
 <div class="container d-flex flex-row flex-wrap">
     <h3>Customer Review</h3>
 </div>
+{% if room.reviewed %}
 <div class="container d-flex flex-row flex-wrap justify-content-centerw">
     {% for review in reviews %}
     <div class="row">
@@ -160,4 +161,5 @@
     </div>
     {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

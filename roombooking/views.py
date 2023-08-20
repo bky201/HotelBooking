@@ -45,7 +45,7 @@ class RoomDetail(View):
     def get(self, request, room_id, *args, **kwargs):
         queryset = Room.objects.all()
         room = get_object_or_404(queryset, id=room_id)
-        reviews = Review.objects.filter(user=request.user.id, room_id=room_id).order_by("created_on")
+        reviews = Review.objects.filter(room_id=room_id).order_by("created_on")
 
         user_booked = Booking.objects.filter(user=request.user.id, room_id=room_id).exists()
 
@@ -101,7 +101,21 @@ class RoomDetail(View):
                 "user_booked": Booking.objects.filter(user=request.user.id, room_id=room_id).exists(),
             },
         )
+class RoomReview(View):
+    """ View a single room """
 
+    def get(self, request, *args, **kwargs):
+        reviews = Review.objects.all().order_by("created_on")
+
+
+        return render(
+            request,
+            "roombooking/room_reviews.html",
+            {
+                "reviews": reviews,
+            },
+        )
+    
 class RoomBookingList(LoginRequiredMixin, ListView):
     """View all booking"""
 
