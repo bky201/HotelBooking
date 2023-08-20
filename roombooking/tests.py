@@ -56,6 +56,12 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'roombooking/room_booking.html')
 
+    def test_room_reviews_list (self):
+        """ Test Room Reviews List """
+        response=self.client.get('/roombooking/review/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'roombooking/room_reviews.html')
+
     def test_booking_detail_page(self):
         " Test Room Details "
         response = self.client.get('/roombooking/1/')
