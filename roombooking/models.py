@@ -27,13 +27,6 @@ FEATURES = (
         ('Garden view', 'Garden view'),
         ('Pool view', 'Pool view'),
     )
-SIZES = (
-    ('Room size: 30 m²/323 ft²', 'Room size: 30 m²/323 ft²'), 
-    ('Room size: 30 m²/323 ft²', 'Room size: 35 m²/323 ft²'), 
-    ('Room size: 30 m²/323 ft²', 'Room size: 40 m²/323 ft²'), 
-    ('Room size: 30 m²/323 ft²', 'Room size: 45 m²/323 ft²'), 
-)
-
 class Room(models.Model):
     """
     A model to create and manage rooms
@@ -43,7 +36,7 @@ class Room(models.Model):
     number = models.IntegerField(default=1)
     features = models.CharField(max_length=30, choices=FEATURES, default='Balcony/terrace')
     beds = models.IntegerField(default=1)
-    size = models.CharField(max_length=60, choices=SIZES, default='Room size: 30 m²/323 ft²')
+    size = models.IntegerField(default=30)
     serviceOne = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
     serviceTwo = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
     price = models.FloatField(default=0.00)

@@ -1,2 +1,2 @@
-# Hotel-Booking
-A Django booking website
+# Hotel-Room-Booking
+Hotel room booking project is a Full Stack website built using Django framework. This booking website is built to enable users to look for a hotel room online and make booking. Users are required to register in order to make booking. When a user registered a user profile will be generated and user can update profile biography and profile image. Users can put the reviews on the booking the made and manage the own booking details. In addition users can create, update or edit and delete their own room booking. 

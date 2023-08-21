@@ -51,8 +51,9 @@
             <div class="row">
                 <div class="col-6">
                     <p class="p-2"><strong>{{ room.features|safe }}</strong></p>
-                    <p class="p-2"><strong>{{ room.size }}</strong></p>
-                    <p class="p-2"><strong>Bed: </strong> {{ room.beds }}</p>
+                    <p class="p-2">Room size: <strong>{{ room.size }}-m²</strong></p>
+                    <p class="p-2">Bed: <strong>{{ room.beds }}</strong></p>
+                    <p class="p-2">Price: <strong>{{ room.price }} Euro</strong></p>
                 </div>
                 <div class="col-6">
                     <h3 class="p-2">Service</h3>
