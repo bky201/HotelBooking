@@ -465,7 +465,7 @@ The website's images were sourced from Pexels and Unsplash, both reputable platf
 
 ### Repository
 
-The website was developed using the Visual Studio code editor and uploaded to the remote repository named 'battleship-game' on GitHub.
+The website was developed using the Visual Studio code editor and uploaded to the remote repository named 'HotelBooking' on GitHub.
 
 During the development process, the following Git commands were utilized to push the code to the remote repository:
 
