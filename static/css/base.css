@@ -191,7 +191,7 @@ a.img-container:hover {
 
 .home.container,
 .about.container {
-    background-color: rgba(224, 224, 222, 0.877);
+    background-color: #e0e0dee0;
 }
 
 .container.booking {
