@@ -72,6 +72,8 @@ footer {
 #footer-bg {
     position: absolute;
     width: 100%;
+    object-fit: cover;
+    background: no-repeat;
     height: 90%;
     position: fixed;
     left: 0;
