@@ -28,9 +28,7 @@
         {{ form|crispy }}
         {{ form.media }}
         <div class="d-flex justify-content-center">
-            <a href="{% url 'profile' request.user.id %}">
-                <button type="submit" class="btn btn-primary">Edit</button>
-            </a>
+            <a href="{% url 'profile' request.user.id %}" class="btn btn-primary">Edit</a>
         </div>
     </form>
 </div>

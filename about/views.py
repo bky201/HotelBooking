@@ -9,4 +9,3 @@ class AboutUs(ListView):
 
     def get_queryset(self):
         return self.model.objects.all()[:4]
-    

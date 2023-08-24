@@ -32,19 +32,15 @@
                     {% else %}
                     <p class="card-text">Customer</p>
                     {% endif %}
-                    <p class="card-text">{{ book.check_in}}</p>
-                    <p class="card-text">{{ book.check_out}}</p>
+                    <p class="card-text">{{ book.ch_in}}</p>
+                    <p class="card-text">{{ book.ch_out}}</p>
                 </div>
             </a>
             
             <div class="text-center">
                 {% if book.id %}
-                <a href="{% url 'edit_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2"> Edit </button>
-                </a>
-                <a href="{% url 'delete_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2">Delete</button>
-                </a>
+                <a href="{% url 'edit_roombooking' book.id %}" class="btn btn-primary mt-2">Edit</a>
+                <a href="{% url 'delete_roombooking' book.id %}" class="btn btn-primary mt-2">Delete</a>
                 {% endif %}
             </div>
             </div>

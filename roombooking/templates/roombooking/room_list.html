@@ -28,14 +28,14 @@
                     {% with room|average_rating as avg_rating %}
                     {% for i in "12345" %}
                         {% if avg_rating|floatformat:1 >= i %}
-                        <span id="filled">★</span>
+                        <span class="filled">★</span>
                         {% else %}
-                        <span id="star">★</span>
+                        <span class="star">★</span>
                         {% endif %}
                     {% endfor %}
                     {% endwith %}
-                    {% if room.reviewed.count > 0 %}
-                    ({{ room.reviewed.count }})
+                    {% if room.re.count > 0 %}
+                    ({{ room.re.count }})
                     {% endif %}
                 </div>
                 <br>

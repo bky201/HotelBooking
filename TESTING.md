@@ -244,25 +244,19 @@ To facilitate the validation process for these files, you can follow these steps
 3. Copy the raw HTML code from the page source.
 4. Paste this raw HTML code into the validator. This code will represent the rendered HTML, allowing for accurate validation.
 
+![HTML Validator](./docs/testing/w3c.png)
 
+In order to maintain code consistency and readability, all pages underwent rigorous validation using the official PEP 8 validator. The primary objective was to ensure adherence to PEP 8 style guidelines across every aspect of the codebase.
 
-
-
-
-
-
-
-![HTML Validator](docs/testing/html.PNG)
-
-All pages were run through the official [Pep8](http://pep8online.com/) validator to ensure all code was pep8 compliant. Some errors were shown due to blank spacing and lines too long, 1 line instead of 2 expected. All of these errors were resolved and code passed through validators with the exception of the settings.py file.
+It is essential to acknowledge that, while most of our code successfully passed through the validators, exceptions existed. Notably, the `settings.py` file posed specific challenges. These exceptions may have arisen due to unique configuration settings or project requirements that we are actively addressing to ensure alignment with PEP 8 guidelines.
 
 The django auto generated code for AUTH_PASSWORD_VALIDATORS were showing up as lines too long. I could not find a way to split these lines but since they were auto generated and not my own custom code, I hope this is acceptable.
 
-![PEP8](docs/testing/pep8.PNG)
+![PEP8](./docs/testing/pep8.png)
 
-JavaScript code was run through [JSHINT](https://jshint.com) javascript validator. lIt flagged up issues with undefined variables as I jad forgotten to use the let keyword. This was fixed and the only warnings remained were that they were unused variables. The functions were called via onclick from the html elements themselves, so are in fact being used.
+The JavaScript code was checked with the [JSHINT](https://jshint.com) validator. It initially identified no issues. 
 
-![JS validator](docs/testing/javascript.PNG)
+![JS validator](./docs/testing/jshint.png)
 
 ## Lighthouse Report
 

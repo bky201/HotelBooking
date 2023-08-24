@@ -25,9 +25,7 @@
         {{ form.media }}
         {{ form|crispy }}
         <div class="text-center">
-            <a href="{% url 'room_bookinglist' %}">
-                <button type="submit" class="btn btn-primary mt-2">Book Room</button>
-            </a>
+            <a href="{% url 'room_bookinglist' %}" class="btn btn-primary mt-2">Book Room</a>
         </div>
     </form>
 </div>

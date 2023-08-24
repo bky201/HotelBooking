@@ -14,11 +14,11 @@ ROOM_TITLE = (
     )
 
 ROOM_SERVICES = (
-        ('Laundry and Dry-cleaner', 'LAUNDRY AND DRY-CLEANER'),
+        ('Laundry', 'LAUNDRY'),
         ('Bath, Sauna and Swimming-pool', 'BATH, SAUNA AND SWIMMING-POOL'),
         ('Billiard, Gym and Playground', 'BILLIARD, GYM AND PLAYGROUND'),
-        ('Sport-Equipment and House-appliance', 'SPORT-EQUIMENT AND HOUSE-APPLIANCE'),
-        ('Car-rent, restaurant and Tour-guide', 'CAR-RENT, RESTAURANT AND TOUR-GUIDE'),
+        ('House-appliance', 'HOUSE-APPLIANCE'),
+        ('Car-rent, and Tour-guide', 'CAR-RENT, AND TOUR-GUIDE'),
     )
 
 FEATURES = (
@@ -27,18 +27,20 @@ FEATURES = (
         ('Garden view', 'Garden view'),
         ('Pool view', 'Pool view'),
     )
+
+
 class Room(models.Model):
     """
     A model to create and manage rooms
     """
-    title = models.CharField(max_length=200, choices=ROOM_TITLE, default='Single-bedroom')
+    title = models.CharField(choices=ROOM_TITLE, default='Single-bedroom')
     slug = models.SlugField(max_length=200, unique=True)
     number = models.IntegerField(default=1)
-    features = models.CharField(max_length=30, choices=FEATURES, default='Balcony/terrace')
+    features = models.CharField(choices=FEATURES, default='Balcony/terrace')
     beds = models.IntegerField(default=1)
     size = models.IntegerField(default=30)
-    serviceOne = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
-    serviceTwo = models.CharField(max_length=200, choices=ROOM_SERVICES, default='Laundry and Dry-cleaner')
+    serviceOne = models.CharField(choices=ROOM_SERVICES, default='Laundry')
+    serviceTwo = models.CharField(choices=ROOM_SERVICES, default='Laundry')
     price = models.FloatField(default=0.00)
     image = ResizedImageField(
         size=[400, None],
@@ -68,23 +70,25 @@ class Room(models.Model):
 
     def __str__(self):
         return f"{self.title} Room no.-{self.number}"
-    
+
+
 class Booking(models.Model):
-    user = models.ForeignKey(User, related_name="booking_owner", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="ow", on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    check_in = models.DateField(default=timezone.now)
-    check_out = models.DateField(default=timezone.now)
+    ch_in = models.DateField(default=timezone.now)
+    ch_out = models.DateField(default=timezone.now)
     created_on = models.DateField(auto_now=True)
 
     class Meta:
-        ordering = ["-check_in"]
+        ordering = ["-ch_in"]
 
     def __str__(self):
         return f"(self.user) booked (self.room)"
 
+
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, related_name='reviewed', on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, related_name='re', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
     comment = models.TextField(max_length=1500, null=True, blank=True)
     rating = models.PositiveIntegerField(default=5)
@@ -96,6 +100,7 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.title)
+
 
 class About(models.Model):
     """
@@ -119,4 +124,3 @@ class About(models.Model):
 
     def __str__(self):
         return self.title
-

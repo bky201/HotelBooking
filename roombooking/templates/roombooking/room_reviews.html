@@ -15,7 +15,7 @@
                 {% if profile.image.url is not none %}
                 <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
                 {% else %}
-                <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
+                <img src="{% static '/images/no-photography-icon.webp' %}" alt="image not found icon">
                 {% endif %}
                 <div class="text">
                     <span class="date text-muted float-md-right">{{ review.created_on|date:"F d, Y" }}</span>
@@ -27,9 +27,9 @@
             <div class="star-ratings">
                 {% for i in "12345" %}
                     {% if review.rating|to_int >= i|to_int %}
-                    <span id="filled">★</span>
+                    <span class="filled">★</span>
                     {% else %}
-                    <span id="star">★</span>
+                    <span class="star">★</span>
                     {% endif %}
                 {% endfor %}
             </div>

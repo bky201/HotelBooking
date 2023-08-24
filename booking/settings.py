@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CLOUDINARY_STORAGE = {
     # other settings, like credentials
-    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'my-manifest-directory')
+    'STATICFILES_MANIFEST_ROOT': BASE_DIR / 'my-manifest-directory'
 }
 
 if os.path.exists('env.py'):
@@ -32,22 +32,17 @@ DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+IS_HEROKU_APP = "DYNO" in os.environ and "CI" not in os.environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU_APP:
     DEBUG = True
 
-ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = ['*']
-
-
-
+ALLOWED_HOSTS = ['roombooking-9c7bc437dd80.herokuapp.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    
-    
+
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -61,19 +56,17 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    
 
     # Apps
     'roombooking',
     'home',
     'about',
     'profiles',
-    
 
     # Other
     'crispy_forms',
     'crispy_bootstrap5',
-    'djrichtextfield', 
+    'djrichtextfield',
 ]
 
 SITE_ID = 1
@@ -82,7 +75,7 @@ LOGIN_REDIRECT = '/'
 LOGOUT_REDIRECT = '/'
 
 DJRICHTEXTFIELD_CONFIG = {
-    'js':['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
+    'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
     'init_template': 'djrichtextfield/init/ckeditor.js',
     'settings': {
         'toolbar': [
@@ -128,7 +121,7 @@ TEMPLATES = [
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
                 'crispy_forms.templatetags.crispy_forms_field',
-            ] 
+                ]
         },
     },
 ]
@@ -147,8 +140,6 @@ WSGI_APPLICATION = 'booking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-
-
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -156,11 +147,11 @@ if 'DATABASE_URL' in os.environ:
 else:
     print("Postgres URL not found, using sqlite instead")
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -214,12 +205,10 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
-    "default":{
+    "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
 }
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -231,11 +220,8 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-
-#Cloudinary Settings
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# Cloudinary Settings
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
