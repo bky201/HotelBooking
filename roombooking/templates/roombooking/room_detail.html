@@ -156,7 +156,13 @@
                 {{ review.title }}
             </div>
             <div class="content">
-                {% include 'includes/toggle_content.html' %}
+                {% if review.comment|length > 80 %}
+                <span class="truncated">{{ review.comment|truncatechars:80 }}</span>
+                <span class="full hidden">{{ review.comment }}</span>
+                <span class="toggleButton">Toggle </span>
+                {% else %}
+                {{ review.comment }}
+                {% endif %}
             </div>
         </div>
     </div>
