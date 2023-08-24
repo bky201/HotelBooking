@@ -96,7 +96,10 @@ footer {
     list-style-type: none;
     text-decoration: none !important;
     color: #FFFFFF;
-    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+    text-shadow: 1px 1px 2px #000000,
+    0 0 1em #000000,
+    0 0 0.2em #000000,
+    2px 2px 1px #000000;
     font-weight: 900;
 }
 
