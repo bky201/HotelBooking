@@ -260,37 +260,44 @@ The JavaScript code was checked with the [JSHINT](https://jshint.com) validator.
 
 ## Lighthouse Report
 
-Lighthouse report showed areas for improvement on SEO and Best practices. Meta descriptions and keywords were added to boost the SEO to 100 but the best practice warnings were coming from the use of an embedded iframe's javascript. Unfortunately I did not find a way to improve this as I am not initialising the google map iframe with javascript.
+Lighthouse was used to test the website for auditing and improving various aspects of web performance, accessibility, best practices, and SEO. Lighthouse audits provide valuable insights, but it's important to combine them with other SEO and web development best practices for a comprehensive approach to optimizing the website's performance, accessibility, best practices, and search engine ranking. Regularly monitoring and improving the site to ensure it meets evolving standards and user expectations.
 
-![Lighthouse v1](docs/testing/light-house-v2.PNG)
+To use Lighthouse for these audits:
+
+In Chrome DevTools: Open your website in Google Chrome, right-click, and select "Inspect." Go to the "Lighthouse" tab, select the audit categories you want to test (Performance, Accessibility, Best Practices, and SEO), and click "Generate report." Review the generated report for suggestions and areas for improvement.
+
+Using the Lighthouse CLI: You can also use Lighthouse from the command line to automate audits and integrate them into your build process.
+
+![Lighthouse v1](./docs/testing/lighthouse.png)
 
 ## Responsiveness
 
-All pages were tested to ensure responsiveness on screen sizes from 320px and upwards as defined in WCAG 2.1 Reflow criteria for responsive design on Chrome, Edge, Firefox and Opera browsers.
+Responsiveness test was implemented to check the ability of the website to adapt and display content effectively on various devices and screen sizes. Users can access the website on a wide range of devices, including desktop computers, laptops, tablets, and smartphones.
 
-Steps to test:
+The design was considered for mobile devices first and then progressively enhanced the layout and functionality for larger screens. This approach ensures that the website performs well on small screens and scales up gracefully.
 
-- Open browser and navigate to [sizzle-and-steak](https://sizzle-and-steak.herokuapp.com/)
-- Open the developer tools (right click and inspect)
-- Set to responsive and decrease width to 320px
-- Set the zoom to 50%
--  Click and drag the responsive window to maximum width
+1. Open browser and navigate to [Hotel-room-booking](https://roombooking-9c7bc437dd80.herokuapp.com/)
+
+2. Open Developer Tools: Right-click on your web page and select "Inspect" or press Ctrl+Shift+I (or Cmd+Option+I on Mac) to open the Developer Tools panel.
+
+3. Switch to Responsive Mode: In the Developer Tools panel, find the "Toggle Device Toolbar" icon (usually shaped like a small phone or tablet) or press Ctrl+Shift+M (or Cmd+Option+M on Mac) to toggle responsive mode. This mode allows you to simulate different screen sizes.
+
+4. Decrease Width to 320px: In responsive mode, you'll typically see a dropdown menu that lets you select different device presets. Choose "Custom" or enter "320" in the width field to set the viewport width to 320 pixels.
+
+5. Set Zoom to 50%: In responsive mode, there's often a zoom option. You can change the zoom level to 50% to simulate a scaled-down view.
+
+6. Click and Drag to Maximum Width: Now, you can click and drag the edges of the responsive window to make it larger. This action simulates how your website responds when viewed on larger screens or when the browser window is resized.
+
+
 
 Expected:
 
-Website is responsive on all screen sizes and no images are pixelated or stretched. No horizontal scroll is present. No elements overlap.
+website effectively adjusts to screens of various sizes, ensuring that images maintain their quality without appearing distorted. There is no need for horizontal scrolling, and all page elements are neatly arranged, preventing any overlapping.
 
 Actual:
 
 Website behaved as expected.
 
-Website was also opened on the following devices and no responsive issues were seen:
-
-Oukitel C21 Pro
-TCL 30 Pro
-iPhone SE
-
-
 ## Bugs
 
-Logic has been implemented to ensure that when a booking is created that it books the table with the capacity lowest to suit the number of guests. When a user updates a booking, this does not function correctly on the edit and will reassign the booking to another table with the next lowest capacity. It should keep the booking on the current table if it is a lower capacity but unfortunately does not work correctly and has not been resolved in time for submission.
+The website implemented a logic system to secure room bookings by aligning them with the specified check-in and check-out dates. However, in cases where another user attempts to reserve the same room with identical check-in and check-out dates, signifying a potential overlap, the system should ideally alert the user that the room is already reserved by another customer. Unfortunately, this was an issue encountered with this functionality, and it has been resolved during the submission.
