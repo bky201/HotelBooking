@@ -155,6 +155,7 @@
             </div>
 <<<<<<< HEAD
             <div class="content">
+<<<<<<< HEAD
                 {% if review.comment|length > 80 %}
                 <span class="truncated">{{ review.comment|truncatechars:80 }}</span>
                 <span class="full hidden">{{ review.comment }}</span>
@@ -166,6 +167,11 @@
             <div>
                 {% include 'includes/toggle_content.html' %}
 >>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
+=======
+                <span class="truncated">{{ review.comment|slice:":100" }}</span>
+                <span class="full hidden">{{ review.comment }}</span>
+                <span class="toggleButton">Toggle </span>
+>>>>>>> a11597f (Fix bugs and hard reset app)
             </div>
         </div>
     </div>
