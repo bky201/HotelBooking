@@ -6,18 +6,7 @@
 
 {% block content %}
 
-<div id="msg">
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
+
 <div class="container booking">
     <form method="POST" enctype="multipart/form-data" class="p-2 form">
         <h1 class="text-center">Booking Form</h1>
@@ -25,9 +14,7 @@
         {{ form.media }}
         {{ form|crispy }}
         <div class="text-center">
-            <a href="{% url 'room_bookinglist' %}">
-                <button type="submit" class="btn btn-primary mt-2">Book Room</button>
-            </a>
+            <a href="{% url 'room_bookinglist' %}" class="btn btn-primary mt-2">Book Room</a>
         </div>
     </form>
 </div>

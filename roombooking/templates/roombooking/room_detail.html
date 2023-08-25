@@ -47,7 +47,7 @@
         <div class="room-detail">
             <h1 class="text-center">{{ room.title }}</h1>
             <p class="text-center">Detail of {{ room.title }}</p>
-            <hr />
+            <hr >
             <div class="row">
                 <div class="col-6">
                     <p class="p-2"><strong>{{ room.features|safe }}</strong></p>
@@ -62,9 +62,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="{% url 'booking_form' %}">
-                    <button type="submit" class="btn btn-primary mt-2">Create Booking</button>
-                </a>
+                <a href="{% url 'booking_form' %}" class="btn btn-primary">Create Booking</a>
             </div>
         </div>
     </div>
@@ -125,7 +123,7 @@
 <div class="container d-flex flex-row flex-wrap">
     <h3>Customer Review</h3>
 </div>
-{% if room.reviewed %}
+{% if room.re %}
 <div class="container d-flex flex-row flex-wrap justify-content-centerw">
     {% for review in reviews %}
     <div class="row">
@@ -134,7 +132,7 @@
                 {% if profile.image.url is not none %}
                 <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
                 {% else %}
-                <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
+                <img src="{% static '/images/no-photography-icon.webp' %}" alt="image not found icon">
                 {% endif %}
                 <div class="text">
                     <span class="date text-muted float-md-right">{{ review.created_on|date:"F d, Y" }}</span>
@@ -146,9 +144,9 @@
             <div class="star-ratings">
                 {% for i in "12345" %}
                     {% if review.rating|to_int >= i|to_int %}
-                    <span id="filled">★</span>
+                    <span class="filled">★</span>
                     {% else %}
-                    <span id="star">★</span>
+                    <span class="star">★</span>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -156,9 +154,13 @@
                 {{ review.title }}
             </div>
             <div class="content">
-                <span class="truncated">{{ review.comment|slice:":100" }}</span>
+                {% if review.comment|length > 80 %}
+                <span class="truncated">{{ review.comment|truncatechars:80 }}</span>
                 <span class="full hidden">{{ review.comment }}</span>
                 <span class="toggleButton">Toggle </span>
+                {% else %}
+                {{ review.comment }}
+                {% endif %}
             </div>
         </div>
     </div>

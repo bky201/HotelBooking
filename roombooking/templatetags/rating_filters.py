@@ -6,6 +6,7 @@ from ..models import Review
 
 register = template.Library()
 
+
 @register.filter
 def average_rating(room):
-    return Review.objects.filter(room=room).aggregate(Avg('rating'))['rating__avg']
+    return Review.objects.filter(room=room).aggregate(Avg("rating"))["rating__avg"]

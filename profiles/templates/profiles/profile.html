@@ -11,27 +11,25 @@
                 {% if profile.image.url is not none %}
                 <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image">
                 {% else %}
-                <img src="{% static '/images/no-photography-icon.png' %}" alt="image not found icon">
+                <img src="{% static '/images/no-photography-icon.webp' %}" alt="image not found icon">
                 {% endif %}
             </div>
             <h1>{{ profile.user.username }}</h1>
             <p><strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}</p>
-            <p><strong>Booking: </strong>{{ profile.user.booking_owner.count }}</p>
+            <p><strong>Booking: </strong>{{ profile.user.ow.count }}</p>
             {% if profile.bio is not none %}
             {{ profile.bio|safe }}
             {% endif %}
 
             {% if request.user == profile.user %}
             <div>
-                <a href="{% url 'edit_profile' profile.id %}">
-                    <button id="myBtn" class="btn btn-primary w-35 mb-4">Edit</button>
-                </a>
+                <a href="{% url 'edit_profile' profile.id %}" class="btn btn-primary mb-4">Edit</a>
             </div>
             {% endif %}
         </div>
         <div class="profile-roombooking">
             <h2 class="text-center pb-4">Latest Bookings</h2>
-            {% for booking in profile.booking_owner.all %}
+            {% for booking in profile.ow.all %}
             <a href="{% url 'room_detail' booking.room.id %}">
                 <h3>{{ booking.room.title }}</h3>
             </a>
@@ -40,5 +38,9 @@
             {% endfor %}
         </div>
     </div>
+    {% if request.user == profile.user %}
+    {% include 'profiles/profile_form.html' %}
+    {% endif %}
+
 </div>
 {% endblock %}

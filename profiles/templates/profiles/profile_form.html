@@ -1,10 +1,22 @@
-{% extends "base.html" %}
-
-{% load static %}
-
-{% block title %}Room Booking{% endblock %}
-
 {% block content %}
+<!-- The Modal -->
+<div id="myModal" class="modal mt-5">
+    <!-- Modal content -->
+    <div class="modal-content container">
+        <span class="close fs-1 pe-2">&times;</span>
+        <form method="POST" action="{% url 'edit_profile' request.user.id %}" class="mb-2 p-2"
+            enctype="multipart/form-data">
+            <h2 class="text-center fs-4">Edit Profile</h2>
+            {% csrf_token %}
+            {{ form|crispy }}
+            {{ form.media }}
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary w-25">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
 
 <div id="msg">
     {% if messages %}
@@ -28,9 +40,7 @@
         {{ form|crispy }}
         {{ form.media }}
         <div class="d-flex justify-content-center">
-            <a href="{% url 'profile' request.user.id %}">
-                <button type="submit" class="btn btn-primary">Edit</button>
-            </a>
+            <a href="{% url 'profile' request.user.id %}" class="btn btn-primary">Edit</a>
         </div>
     </form>
 </div>

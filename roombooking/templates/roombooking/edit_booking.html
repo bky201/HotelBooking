@@ -7,18 +7,13 @@
 {% block content %}
 
 <div class="container booking">
-    <div id="msg">
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
             {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
+    </ul>
+    {% endif %}
     <form method="POST" enctype="multipart/form-data" class="p-2 form">
         <h1 class="text-center">Edit Room Booking</h1>
         {% csrf_token %}

@@ -17,8 +17,25 @@ Hotel room booking project is a Full Stack website built using Django framework.
       - [Epics](#epics)
       - [User Stories](#user-stories)
   - [Website-Scope-Plane](#website-scope-plane)
+  - [Website-Structure-Design](#website-structure-design)
+    - [Features](#features)
+    - [Features Left To Implement](#features-left-to-implement)
+  - [The-Skeleton-Plane](#the-skeleton-plane)
+    - [Wireframes](#wireframes)
+    - [Database-Design](#database-design) 
+    - [Security](#security)
+  - [Design](#design)
+    - [Colour-Options](#colour-options)
+    - [Typography](#typography)
+    - [Imagery](#imagery)
+  - [Technologies](#technolgies)
+  - [Testing](#testing)
+  - [Deployment](#deployment)
+    - [Repository](#repository)
+    - [Hosting on Heroku](#hosting-on-heroku)
+  - [Clone the repository code locally](#clone-the-repository-code-locally)
 
-  
+ 
 
 # User Experience - Design 
 
@@ -55,7 +72,7 @@ This epic include base setup and an early stage app deployment to heroku so that
 
 **EPIC 3 - Error alerts, home and about page**
 
-This epic is about customizing error pages, especially the 404 and 403 pages, inorder to get best practice in the website development. It not only enhances the user experience by providing helpful information but also ensures that the design and branding of our website are consistent even when errors occur. Additionally, for the 500 error, administrators should be alerted to investigate and resolve the underlying server issue promptly. A home page and an about page are fundamental components of a website, each serving a distinct purpose. The home page is the main landing page of our website, typically accessible via the root domain. The about page includes the website's mission, history, and contact information. The home page serves as the front door of our website, offering a snapshot of its content and enticing visitors to explore further, while the about page provides context and background information, fostering trust and connection with the audience. Both pages are essential for a well-rounded and user-friendly web presence.
+This epic is about customizing error pages, especially the 404 and 403 pages, inorder to get best practice in the website development. It is not only enhances the user experience by providing helpful information but also ensures that the design and branding of our website are consistent even when errors occur. Additionally, for the 500 error, administrators should be alerted to investigate and resolve the underlying server issue promptly. A home page and an about page are fundamental components of a website, each serving a distinct purpose. The home page is the main landing page of our website, typically accessible via the root domain. The about page includes the website's mission, history, and contact information. The home page serves as the front door of our website, offering a snapshot of its content and enticing visitors to explore further, while the about page provides context and background information, fostering trust and connection with the audience. Both pages are essential for a well-rounded and user-friendly web presence.
 
 ![EPIC 3](./docs/websiteimages/sprint3.png)
 
@@ -114,6 +131,8 @@ As a developer I can style allauth pages so that Pages get proper structure
 **EPIC 3 - Error alerts, home and about page**
 
 As a developer I can create 404 error page so that users know the page doesn't exist
+
+As a developer I can create 403 error page so that users know request is unauthorised from server
 
 As a developer I can create error page 500 so that users know it is internal server error
 
@@ -317,13 +336,47 @@ The custom 404 page will allow the user to easily navigate back to the main page
 
 ![404-page](./docs/websiteimages/404page.png)
 
+**403 Page**
+
+a "404 Error Page" or simply an "Error 404 Page," is displayed to a user when they try to access a URL (Uniform Resource Locator) on a website, but the server cannot find the requested page. The "404" status code is part of the HTTP protocol, indicating that the requested resource (web page) does not exist.
+
+The custom 404 page will allow the user to easily navigate back to the main page if they direct to a broken link / missing page, with custom link that directs the user to home page. 
+
+![403-page](./docs/websiteimages/403page.png)
+
 **500 Page**
 
 A 500 error page has been displayed to alert users when an internal server error occurs. The message relays to users that the problem is on our end, not theirs.
 
+**Reviews**
+
+Reviews functionality was implemented to take opinion from guests to rate different aspects of their stay, such as room quality, cleanliness, service, location, and overall experience. These ratings are typically on a scale (e.g., 1 to 5 stars), providing a quick overview of guest satisfaction. 
+
+Reviews typically include the date of the guest's stay. This can be useful because hotel experiences can change over time, and recent reviews may be more relevant.
+
+Our booking platforms verify that a guest has actually stayed at the hotel before allowing them to leave a review. Verified reviews are often more trusted by potential guests.
+
+![403-page](./docs/websiteimages/reviewspage.png)
+
+
+**User-Profile-Page**
+
+A user profile page provides various details and features related to the individual user. A user's profile picture or avatar is often displayed prominently at the top of the page. This image represents the user visually.
+
+The user's chosen username or display name is usually displayed, allowing others to identify and address them.
+
+Users often have the option to write a short bio or provide information about themselves. This could include their interests, profession, location, or a brief introduction. 
+
+![profile-page](./docs/websiteimages/profile.png)
+
+Users also can edit their  profile picture, their username and their Bio or About Section.
+
+![edit-profile](./docs/websiteimages/editprofile.png)
 
 ### Features Left To Implement
 - In a future release I would like to add a page which enable staff members to perform CRUD for room booking from UI without using the admin panel. 
+
+- I would like to give brief calander view of available booking dates for the user in order to make booking.
 
 
 ## The-Skeleton-Plane
@@ -368,6 +421,10 @@ A 500 error page has been displayed to alert users when an internal server error
 - 404 Error 
 
 ![404 Error](./docs/wireframe/404page.png)
+
+- 403 Error 
+
+![403 Error](./docs/wireframe/403page.png)
 
 - 500 Error 
 
@@ -459,6 +516,7 @@ The website's images were sourced from Pexels and Unsplash, both reputable platf
 
 ## Testing
 
+Detailed test cases and comprehensive results are available in the [TESTING.md](TESTING.md) file. We have moved this information to ensure a more organized and accessible documentation structure, particularly given the extensive nature of the testing process. In the TESTING.md file, you will find a breakdown of various test scenarios, the steps taken during testing, expected outcomes, and actual results for each scenario.
 
 
 ## Deployment
