@@ -20,8 +20,8 @@
 </div>
 
 <div class="container booking d-flex flex-row flex-wrap justify-content-center" >
-    {% for book in roombook %}
-    {% if request.user.id == book.user.id %}
+    {% for book in roomlist %}
+    {% if request.user == book.user %}
     <div class="card m-3" style="width: 18rem;">
         <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
                 <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">

@@ -124,6 +124,10 @@ footer {
     cursor: pointer;
 }
 
+.card-img-top {
+    height: 14rem;
+}
+
 /* room_detail */
 .roomdetail-info {
     display: flex;
@@ -191,7 +195,7 @@ a.img-container:hover {
 
 .home.container,
 .about.container {
-    background-color: rgba(224, 224, 222, 0.877);
+    background-color: #e0e0dee0;
 }
 
 .container.booking {
@@ -211,7 +215,9 @@ a.img-container:hover {
   }
 
 #msg {
-    position: relation;
+    position: relative;
+    width: 80%;
+    align-items: center;
 }
 
 /* welcome */

@@ -156,7 +156,9 @@
                 {{ review.title }}
             </div>
             <div class="content">
-                {% include 'includes/toggle_content.html' %}
+                <span class="truncated">{{ review.comment|slice:":100" }}</span>
+                <span class="full hidden">{{ review.comment }}</span>
+                <span class="toggleButton">Toggle </span>
             </div>
         </div>
     </div>
