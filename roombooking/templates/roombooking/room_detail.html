@@ -153,6 +153,7 @@
             <div>
                 {{ review.title }}
             </div>
+<<<<<<< HEAD
             <div class="content">
                 {% if review.comment|length > 80 %}
                 <span class="truncated">{{ review.comment|truncatechars:80 }}</span>
@@ -161,6 +162,10 @@
                 {% else %}
                 {{ review.comment }}
                 {% endif %}
+=======
+            <div>
+                {% include 'includes/toggle_content.html' %}
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
             </div>
         </div>
     </div>

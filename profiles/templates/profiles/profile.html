@@ -23,20 +23,33 @@
 
             {% if request.user == profile.user %}
             <div>
+<<<<<<< HEAD
                 <a href="{% url 'edit_profile' profile.id %}" class="btn btn-primary mb-4">Edit</a>
+=======
+                <button id="myBtn" class="btn btn-primary w-25 mb-4">Edit</button>
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
             </div>
             {% endif %}
         </div>
         <div class="profile-roombooking">
             <h2 class="text-center pb-4">Latest Bookings</h2>
+<<<<<<< HEAD
             {% for booking in profile.user.ow.all %}
             <a href="{% url 'room_detail' booking.room.id %}">
                 <h3>{{ booking.room.title }}</h3>
             </a>
+=======
+            {% for booking in profile.user.booking_owner.all %}
+            <a href="{% url 'room_detail' booking.room.id %}"><h3>{{ booking.room.title }}</h3></a>
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
             {{ booking.created_on }}
             <hr>
             {% endfor %}
         </div>
     </div>
+        {% if request.user == profile.user %}
+            {% include 'profiles/profile_form.html' %}
+        {% endif %}
+
 </div>
 {% endblock %}

@@ -16,7 +16,6 @@ from .models import Room, Booking, Review
 from .forms import BookForm, ReviewForm
 from django.db.models import Q
 from django.db.models import Avg
-from django.utils import timezone
 
 
 class RoomList(ListView):
@@ -124,13 +123,13 @@ class RoomReview(View):
     """ View a single room """
 
     def get(self, request, *args, **kwargs):
-        roomreviews = Review.objects.all().order_by("created_on")
+        reviews = Review.objects.all().order_by("created_on")
 
         return render(
             request,
             "roombooking/room_reviews.html",
             {
-                "roomreviews": roomreviews,
+                "reviews": reviews,
             },
         )
 
@@ -148,6 +147,7 @@ class RoomBookingList(LoginRequiredMixin, ListView):
 
 
 class RoomAvailabilityMixin:
+<<<<<<< HEAD
     def check_room_availability(
         self, room, ch_in, ch_out, current_booking=None
             ):
@@ -176,12 +176,18 @@ class RoomAvailabilityMixin:
         )
 
         # Exclude the current booking if provided
+=======
+    def check_room_availability(self, room, check_in, check_out, current_booking=None):
+        # Create a queryset excluding the current booking (if provided)
+        existing_bookings = Booking.objects.filter(room=room, check_in__lt=check_out, check_out__gt=check_in)
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
         if current_booking:
             existing_bookings = existing_bookings.exclude(
                 pk=current_booking.pk
                     )
 
         for booking in existing_bookings:
+<<<<<<< HEAD
             # Check if there's an overlap in date ranges
             if booking.ch_in < ch_out and booking.ch_out > ch_in:
                 # There's an overlap in bookings
@@ -193,6 +199,12 @@ class RoomAvailabilityMixin:
 
         # If no overlapping bookings were found
         # and conditions are met, the room is available
+=======
+            if booking.user == self.request.user or booking.check_in < check_out or booking.check_out > check_in:
+                # The same user has already booked the room for the specified dates
+                return False
+
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
         return True
 
 
@@ -213,6 +225,7 @@ class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
         # Check room availability using the check_room_availability method
         if not self.check_room_availability(room, ch_in, ch_out):
             # Room is not available, show an error message
+            messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
         messages.success(
             self.request,
@@ -242,6 +255,7 @@ class EditBooking(
             room, ch_in, ch_out, current_booking=self.object
                 ):
             # Room is not available, show an error message
+            messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
 
         messages.success(

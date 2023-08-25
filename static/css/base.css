@@ -130,10 +130,6 @@ footer {
     cursor: pointer;
 }
 
-.card-img-top {
-    height: 14rem;
-}
-
 /* room_detail */
 .roomdetail-info {
     display: flex;
@@ -221,9 +217,7 @@ a.img-container:hover {
   }
 
 #msg {
-    position: relative;
-    width: 80%;
-    align-items: center;
+    position: relation;
 }
 
 /* welcome */

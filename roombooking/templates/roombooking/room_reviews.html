@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="container d-flex flex-row flex-wrap justify-content-centerw">
-    {% for review in roomreviews %}
+    {% for review in reviews %}
     <div class="row">
         <div class="col-md-3">
             <div class="review-img w-100">
@@ -36,6 +36,7 @@
             <div>
                 {{ review.title }}
             </div>
+<<<<<<< HEAD
             <div class="content">
                 {% if review.comment|length > 80 %}
                 <span class="truncated">{{ review.comment|truncatechars:80 }}</span>
@@ -44,9 +45,14 @@
                 {% else %}
                 {{ review.comment }}
                 {% endif %}
+=======
+            <div>
+                {% include 'includes/toggle_content.html' %}
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}

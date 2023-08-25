@@ -6,24 +6,27 @@
 
 {% block content %}
 
-<div id="msg">
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </ul>
+{% endif %}
 
-<div class="container booking d-flex flex-row flex-wrap justify-content-center" >
+<div class="container booking d-flex flex-row flex-wrap justify-content-center">
     {% for book in roombook %}
+<<<<<<< HEAD
     {% if request.user == book.user %}
     <div class="card m-3" style="width: 18rem;">
+=======
+    {% if request.user.id == book.user.id %}
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
         <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
+            <div class="card m-3" style="width: 18rem;">
                 <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
                 <div class="card-body">
                     <p class="card-title">{{ book.room }}</p>
@@ -35,6 +38,7 @@
                     <p class="card-text">{{ book.ch_in}}</p>
                     <p class="card-text">{{ book.ch_out}}</p>
                 </div>
+<<<<<<< HEAD
             </a>
             
             <div class="text-center">
@@ -43,7 +47,21 @@
                 <a href="{% url 'delete_roombooking' book.id %}" class="btn btn-primary mt-2">Delete</a>
                 {% endif %}
             </div>
+=======
+                <div class="text-center">
+                    {% if book.id %}
+                    <a href="{% url 'edit_roombooking' book.id %}">
+                        <button type="submit" class="btn btn-primary mt-2"> Edit </button>
+                    </a>
+                    <a href="{% url 'delete_roombooking' book.id %}">
+                        <button type="submit" class="btn btn-primary mt-2">Delete</button>
+                    </a>
+                    {% endif %}
+                </div>
+                
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
             </div>
+        </a>
 
     {% endif %}
     {% endfor %}

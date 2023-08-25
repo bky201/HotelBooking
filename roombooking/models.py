@@ -75,9 +75,15 @@ class Room(models.Model):
 class Booking(models.Model):
     user = models.ForeignKey(User, related_name="ow", on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+<<<<<<< HEAD
     ch_in = models.DateField(default=timezone.now)
     ch_out = models.DateField(default=timezone.now)
     created_on = models.DateField(auto_now=True)
+=======
+    check_in = models.DateTimeField(default=timezone.now)
+    check_out = models.DateTimeField(default=timezone.now)
+    created_on = models.DateTimeField(auto_now=True)
+>>>>>>> parent of ff542f8 (fix bugs on booking page and profile edit page)
 
     class Meta:
         ordering = ["-ch_in"]
