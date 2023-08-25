@@ -23,22 +23,22 @@
 
             {% if request.user == profile.user %}
             <div>
-                <a href="{% url 'edit_profile' profile.id %}">
-                    <button id="myBtn" class="btn btn-primary w-35 mb-4">Edit</button>
-                </a>
+                <button id="myBtn" class="btn btn-primary w-25 mb-4">Edit</button>
             </div>
             {% endif %}
         </div>
         <div class="profile-roombooking">
             <h2 class="text-center pb-4">Latest Bookings</h2>
             {% for booking in profile.user.booking_owner.all %}
-            <a href="{% url 'room_detail' booking.room.id %}">
-                <h3>{{ booking.room.title }}</h3>
-            </a>
+            <a href="{% url 'room_detail' booking.room.id %}"><h3>{{ booking.room.title }}</h3></a>
             {{ booking.created_on }}
             <hr>
             {% endfor %}
         </div>
     </div>
+        {% if request.user == profile.user %}
+            {% include 'profiles/profile_form.html' %}
+        {% endif %}
+
 </div>
 {% endblock %}

@@ -13,7 +13,6 @@ from .models import Room, Booking, Review
 from .forms import BookForm, ReviewForm
 from django.db.models import Q
 from django.db.models import Avg
-from django.utils import timezone
 
 
 class RoomList(ListView):
@@ -106,14 +105,14 @@ class RoomReview(View):
     """ View a single room """
 
     def get(self, request, *args, **kwargs):
-        roomreviews = Review.objects.all().order_by("created_on")
+        reviews = Review.objects.all().order_by("created_on")
 
 
         return render(
             request,
             "roombooking/room_reviews.html",
             {
-                "roomreviews": roomreviews,
+                "reviews": reviews,
             },
         )
     
@@ -130,37 +129,17 @@ class RoomBookingList(LoginRequiredMixin, ListView):
     
 class RoomAvailabilityMixin:
     def check_room_availability(self, room, check_in, check_out, current_booking=None):
-        # Check if check_in is greater than or equal to the current date
-        if check_in < timezone.now().date():
-            messages.error(self.request, "Check_in date is not valid please enter a valid date.")
-            return False
-
-        # Check if check_out is greater than or equal to check_in
-        if check_out <= check_in:
-            messages.error(self.request, "Check_out date is not valid please enter a valid date.")
-            return False
-
-        # Create a queryset for existing bookings that overlap with the given dates
-        existing_bookings = Booking.objects.filter(
-            room=room,
-            check_in__lt=check_out,
-            check_out__gt=check_in
-        )
-
-        # Exclude the current booking if provided
+        # Create a queryset excluding the current booking (if provided)
+        existing_bookings = Booking.objects.filter(room=room, check_in__lt=check_out, check_out__gt=check_in)
         if current_booking:
             existing_bookings = existing_bookings.exclude(pk=current_booking.pk)
 
         for booking in existing_bookings:
-            # Check if there's an overlap in date ranges
-            if booking.check_in < check_out and booking.check_out > check_in:
-                # There's an overlap in bookings
-                messages.error(self.request, "Booking date is already reserved please try different date.")
+            if booking.user == self.request.user or booking.check_in < check_out or booking.check_out > check_in:
+                # The same user has already booked the room for the specified dates
                 return False
 
-        # If no overlapping bookings were found and conditions are met, the room is available
         return True
-
 
 
 class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
@@ -180,6 +159,7 @@ class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
         # Check room availability using the check_room_availability method
         if not self.check_room_availability(room, check_in, check_out):
             # Room is not available, show an error message
+            messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
         
         messages.success(
@@ -205,6 +185,7 @@ class EditBooking(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin
         # Check room availability using the check_room_availability method
         if not self.check_room_availability(room, check_in, check_out, current_booking=self.object):
             # Room is not available, show an error message
+            messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
 
         messages.success(

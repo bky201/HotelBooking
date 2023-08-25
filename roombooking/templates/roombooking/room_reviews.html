@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="container d-flex flex-row flex-wrap justify-content-centerw">
-    {% for review in roomreviews %}
+    {% for review in reviews %}
     <div class="row">
         <div class="col-md-3">
             <div class="review-img w-100">
@@ -36,12 +36,12 @@
             <div>
                 {{ review.title }}
             </div>
-            <div class="content">
+            <div>
                 {% include 'includes/toggle_content.html' %}
-                <!-- {{ review.comment }} -->
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}
