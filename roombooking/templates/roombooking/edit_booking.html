@@ -5,17 +5,21 @@
 {% block title %}Edit Room Booking{% endblock %}
 
 {% block content %}
-
-<div class="container booking">
+<div class="msg">
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
     </ul>
     {% endif %}
+</div>
+<div class="container booking">
     <form method="POST" enctype="multipart/form-data" class="p-2 form">
-        <h1 class="text-center">Edit Room Booking</h1>
+        <h2 class="text-center">Edit Room Booking</h2>
         {% csrf_token %}
         {{ form.media }}
         {{ form|crispy }}

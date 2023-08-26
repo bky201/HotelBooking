@@ -7,16 +7,16 @@
 {% block content %}
 
 
-    <div class="container booking">
-        <h1 class="text-center mt-2">
-            Confirm Room Booking Deletion
-        </h1>
-        <div class="d-flex justify-content-center pt-3">
-            <form method="post" class="text-center">
-                {% csrf_token %}
-                <p>Are you sure you want to delete "{{ object.title }}"?</p>
-                <input type="submit" value="Confirm" class="btn btn-primary w-45">
-            </form>
-        </div>
+<div class="container booking">
+    <h1 class="text-center mt-2">
+        Confirm Room Booking Deletion
+    </h1>
+    <div class="d-flex justify-content-center pt-3">
+        <form method="post" class="text-center">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ object.title }}"?</p>
+            <input type="submit" value="Confirm" class="btn btn-primary w-45">
+        </form>
     </div>
+</div>
 {% endblock %}

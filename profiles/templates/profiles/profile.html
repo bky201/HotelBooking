@@ -29,7 +29,7 @@
         </div>
         <div class="profile-roombooking">
             <h2 class="text-center pb-4">Latest Bookings</h2>
-            {% for booking in profile.ow.all %}
+            {% for booking in profile.user.ow.all %}
             <a href="{% url 'room_detail' booking.room.id %}">
                 <h3>{{ booking.room.title }}</h3>
             </a>
@@ -38,9 +38,5 @@
             {% endfor %}
         </div>
     </div>
-    {% if request.user == profile.user %}
-    {% include 'profiles/profile_form.html' %}
-    {% endif %}
-
 </div>
 {% endblock %}

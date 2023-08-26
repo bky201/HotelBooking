@@ -136,11 +136,11 @@ class RoomBookingList(LoginRequiredMixin, ListView):
 
     template_name = "roombooking/room_booking.html"
     model = Booking
-    queryset = Booking.objects.all().order_by("-ch_in")
     context_object_name = "roombook"
 
     def get_queryset(self):
-        return self.model.objects.all()
+        # Modify the queryset to order it by ch_in in descending order
+        return self.model.objects.all().order_by("-ch_in")
 
 
 class RoomAvailabilityMixin:
@@ -183,7 +183,7 @@ class RoomAvailabilityMixin:
         return True
 
 
-class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
+class BookingForm(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin, CreateView):
     """Create booking"""
 
     form_class = BookForm
@@ -191,6 +191,11 @@ class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
     model = Booking
     success_url = reverse_lazy("room_bookinglist")
     context_object_name = "bookform"
+
+    def test_func(self):
+        # Implement your custom permission logic here
+        # Return True if the user has permission, False otherwise
+        return self.request.user.is_authenticated  
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -200,8 +205,6 @@ class BookingForm(LoginRequiredMixin, RoomAvailabilityMixin, CreateView):
 
         # Check room availability using the check_room_availability method
         if not self.check_room_availability(room, ch_in, ch_out):
-            # Room is not available, show an error message
-            messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
         messages.success(self.request, f"Booking {room} Completed Successful")
 
@@ -228,8 +231,6 @@ class EditBooking(
         if not self.check_room_availability(
             room, ch_in, ch_out, current_booking=self.object
         ):
-            # Room is not available, show an error message
-            messages.error(self.request, "Booking is not possible at the given date.")
             return self.form_invalid(form)
 
         messages.success(self.request, f"Booking Updated {room} Successful")

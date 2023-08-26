@@ -6,46 +6,44 @@
 
 {% block content %}
 
-{% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        </ul>
-{% endif %}
+<div class="msg">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
 
 <div class="container booking d-flex flex-row flex-wrap justify-content-center">
     {% for book in roombook %}
-    {% if request.user.id == book.user.id %}
-        <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
-            <div class="card m-3" style="width: 18rem;">
-                <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
-                <div class="card-body">
-                    <p class="card-title">{{ book.room }}</p>
-                    {% if request.user == book.user %}
-                    <p class="card-text">{{ book.user }}</p>
-                    {% else %}
-                    <p class="card-text">Customer</p>
-                    {% endif %}
-                    <p class="card-text">{{ book.ch_in}}</p>
-                    <p class="card-text">{{ book.ch_out}}</p>
-                </div>
-                <div class="text-center">
-                    {% if book.id %}
-                    <a href="{% url 'edit_roombooking' book.id %}">
-                        <button type="submit" class="btn btn-primary mt-2"> Edit </button>
-                    </a>
-                    <a href="{% url 'delete_roombooking' book.id %}">
-                        <button type="submit" class="btn btn-primary mt-2">Delete</button>
-                    </a>
-                    {% endif %}
-                </div>
-                
+    {% if request.user == book.user %}
+    <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
+        <div class="card m-3" style="width: 18rem;">
+            <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
+            <div class="card-body">
+                <p class="card-title">{{ book.room }}</p>
+                <p class="card-text">{{ book.user }}</p>
+                <p class="card-text">{{ book.ch_in}}</p>
+                <p class="card-text">{{ book.ch_out}}</p>
             </div>
-        </a>
+            <div class="text-center">
+                {% if book.id %}
+                <a href="{% url 'edit_roombooking' book.id %}">
+                    <button type="submit" class="btn btn-primary mt-2"> Edit </button>
+                </a>
+                <a href="{% url 'delete_roombooking' book.id %}">
+                    <button type="submit" class="btn btn-primary mt-2">Delete</button>
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+    </a>
 
     {% endif %}
     {% endfor %}

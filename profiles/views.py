@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
+from django.urls import reverse_lazy
 from .models import Profile
 from .forms import ProfileForm
 
@@ -12,20 +13,19 @@ class Profiles(TemplateView):
 
     def get_context_data(self, **kwargs):
         profile = Profile.objects.get(user=self.kwargs["pk"])
-        context = {"profile": profile, "form": ProfileForm(instance=profile)}
+        context = {"profile": profile,}
 
         return context
 
 
 class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    """Edite a profile"""
-
-    form_class = ProfileForm
+    
     model = Profile
+    form_class = ProfileForm
+    template_name = 'profiles/profile_edit.html'
 
-    def form_valid(self, form):
-        self.success_url = f'/profiles/user/{self.kwargs["pk"]}'
-        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse_lazy('profile', kwargs={'pk': self.object.pk})
 
     def test_func(self):
         return self.request.user == self.get_object().user
