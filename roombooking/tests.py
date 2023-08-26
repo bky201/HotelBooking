@@ -94,7 +94,7 @@ class TestViews(TestCase):
 
         # Try to delete the booking created by bookadmin
         booking_id = 1
-        url = reverse("delete_roombooking", args=[booking_id])
+        url = reverse("delete_room", args=[booking_id])
         self.assertTrue(logged_in)
         response = self.client.get(url)
         self.assertEqual(response.status_code, 403)

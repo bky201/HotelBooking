@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Delete Room Booking {{ object.title }}{% endblock %}
+{% block title %}Delete Room Booking {{ roombook.title }}{% endblock %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@
     <div class="d-flex justify-content-center pt-3">
         <form method="post" class="text-center">
             {% csrf_token %}
-            <p>Are you sure you want to delete "{{ object.title }}"?</p>
+            <p>Are you sure you want to delete?</p>   
             <input type="submit" value="Confirm" class="btn btn-primary w-45">
         </form>
     </div>

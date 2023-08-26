@@ -9,4 +9,6 @@ register = template.Library()
 
 @register.filter
 def average_rating(room):
-    return Review.objects.filter(room=room).aggregate(Avg("rating"))["rating__avg"]
+    reviews = Review.objects.filter(room=room)
+    avg_rating = reviews.aggregate(Avg("rating"))["rating__avg"]
+    return avg_rating

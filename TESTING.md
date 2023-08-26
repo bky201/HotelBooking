@@ -248,7 +248,7 @@ To facilitate the validation process for these files, you can follow these steps
 
 In order to maintain code consistency and readability, all pages underwent rigorous validation using the official PEP 8 validator. The primary objective was to ensure adherence to PEP 8 style guidelines across every aspect of the codebase.
 
-It is essential to acknowledge that, while most of our code successfully passed through the validators, exceptions existed. Notably, the `settings.py` file posed specific challenges. These exceptions may have arisen due to unique configuration settings or project requirements that we are actively addressing to ensure alignment with PEP 8 guidelines.
+It is essential to acknowledge that, while most of our code successfully passed through the validators, exceptions existed. Notably, the `settings.py` file posed specific challenges. These exceptions may have arisen due to unique configuration settings or project requirements that we are actively addressing to ensure alignment with [Pep8](https://pep8ci.herokuapp.com/) guidelines.
 
 The django auto generated code for AUTH_PASSWORD_VALIDATORS were showing up as lines too long. I could not find a way to split these lines but since they were auto generated and not my own custom code, I hope this is acceptable.
 

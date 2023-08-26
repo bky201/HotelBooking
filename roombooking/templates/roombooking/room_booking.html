@@ -22,28 +22,26 @@
 <div class="container booking d-flex flex-row flex-wrap justify-content-center">
     {% for book in roombook %}
     {% if request.user == book.user %}
-    <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
-        <div class="card m-3" style="width: 18rem;">
-            <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
+    <div class="card m-3" style="width: 18rem;">
+        <img src="{{ book.room.image.url }}" class="card-img-top" alt="{{ book.image_alt }}">
+        <a href="{% url 'room_detail' book.room.id %}" class="rooms" aria-label="Click to view {{book.title}}">
             <div class="card-body">
                 <p class="card-title">{{ book.room }}</p>
                 <p class="card-text">{{ book.user }}</p>
                 <p class="card-text">{{ book.ch_in}}</p>
                 <p class="card-text">{{ book.ch_out}}</p>
             </div>
+        </a>
             <div class="text-center">
                 {% if book.id %}
-                <a href="{% url 'edit_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2"> Edit </button>
+                <a href="{% url 'edit_roombooking' book.id %}" class="btn btn-primary mt-2" >Edit
                 </a>
-                <a href="{% url 'delete_roombooking' book.id %}">
-                    <button type="submit" class="btn btn-primary mt-2">Delete</button>
+                <a href="{% url 'delete_room' book.id %}" class="btn btn-primary mt-2">Delete
                 </a>
                 {% endif %}
             </div>
 
         </div>
-    </a>
 
     {% endif %}
     {% endfor %}

@@ -90,14 +90,20 @@ class RoomDetail(View):
                 review_exist.title = title
                 review_exist.comment = comment
                 review_exist.save()
-                messages.success(request, "Review for room updated successfully.")
+                messages.success(
+                    request,
+                    "Review for room updated successfully."
+                        )
             else:
                 # If the review was just created, set its attributes
                 review_exist.rating = int(rating)
                 review_exist.title = title
                 review_exist.comment = comment
                 review_exist.save()
-                messages.success(request, "Review for room created successfully.")
+                messages.success(
+                    request,
+                    "Review for room created successfully."
+                    )
 
             # Redirect to the room detail page after submitting the review
             return redirect("room_detail", room_id=room_id)
@@ -144,18 +150,22 @@ class RoomBookingList(LoginRequiredMixin, ListView):
 
 
 class RoomAvailabilityMixin:
-    def check_room_availability(self, room, ch_in, ch_out, current_booking=None):
+    def check_room_availability(
+        self, room, ch_in, ch_out, current_booking=None
+            ):
         # Check if ch_in is greater than or equal to the current date
         if ch_in < timezone.now().date():
             messages.error(
-                self.request, "check_in date is not valid please enter a valid date."
+                self.request,
+                "check_in date is not valid please enter a valid date."
             )
             return False
 
         # Check if ch_out is greater than or equal to ch_in
         if ch_out <= ch_in:
             messages.error(
-                self.request, "check_out date is not valid please enter a valid date."
+                self.request,
+                "check_out date is not valid please enter a valid date."
             )
             return False
 
@@ -167,14 +177,17 @@ class RoomAvailabilityMixin:
 
         # Exclude the current booking if provided
         if current_booking:
-            existing_bookings = existing_bookings.exclude(pk=current_booking.pk)
+            existing_bookings = existing_bookings.exclude(
+                pk=current_booking.pk
+                )
 
         for booking in existing_bookings:
             # Check if there's an overlap in date ranges
             if booking.ch_in < ch_out and booking.ch_out > ch_in:
                 # There's an overlap in bookings
                 messages.error(
-                    self.request, "Booking date is already reserved try different date."
+                    self.request,
+                    "Booking date is already reserved try different date."
                 )
                 return False
 
@@ -183,7 +196,9 @@ class RoomAvailabilityMixin:
         return True
 
 
-class BookingForm(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin, CreateView):
+class BookingForm(
+    LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin, CreateView
+        ):
     """Create booking"""
 
     form_class = BookForm
@@ -195,7 +210,7 @@ class BookingForm(LoginRequiredMixin, UserPassesTestMixin, RoomAvailabilityMixin
     def test_func(self):
         # Implement your custom permission logic here
         # Return True if the user has permission, False otherwise
-        return self.request.user.is_authenticated  
+        return self.request.user.is_authenticated
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -249,7 +264,7 @@ class DeleteRoomBooking(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def form_valid(self, form):
         """Display message on delete success"""
-        messages.success(self.request, "Successfully deleted {room} booking")
+        messages.success(self.request, "Successfully deleted booking")
         return super(DeleteRoomBooking, self).form_valid(form)
 
     def test_func(self):
