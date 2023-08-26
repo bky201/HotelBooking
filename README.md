@@ -34,6 +34,7 @@ Hotel room booking project is a Full Stack website built using Django framework.
     - [Repository](#repository)
     - [Hosting on Heroku](#hosting-on-heroku)
   - [Clone the repository code locally](#clone-the-repository-code-locally)
+  - [Credits](#credits)
 
  
 
@@ -45,7 +46,7 @@ Hotel room booking project is a Full Stack website built using Django framework.
 
 The main goal of this website is to develop hotel management system that can provide booking services online for users and help hotel staff member to monitor room bookings and make the necessary preparation.
 
-The site provides customers with all the neccessary information on room services and room detail views so that customers can plan for their booking before their arrival to the hotel without facing any problems. 
+The site provides customers with all the necessary information on room services and room detail views so that customers can plan for their booking before their arrival to the hotel without facing any problems. 
 
 ### Agile Methodology
 
@@ -60,7 +61,7 @@ The project had 8 main Epics (milestones):
 
 **EPIC 1 - Project Setup**
 
-Setting project environment is a self-contained workspace that isolates Python packages and dependencies for a specific project, preventing conflicts with other projects. It allows developers to manage project-specific libraries and versions, ensuring consistency and reproducibility. In the next step, setting the navigation bar, is a crucial element found at the top of webpages, offering users quick access to important sections or pages. Conversely, the footer, situated at the bottom of the page, supplies additional information like contact details, copyrights, and useful links, enriching the overall user experience. Alongside these, creating static files such as images, and stylesheets, were added for enhancing a website's design and interactivity by providing the necessary visual and interactive elements. These elements collectively ensure a well-structured, informative, and engaging web presence. 
+Setting project environment is a self-contained workspace that isolates Python packages and dependencies for a specific project, preventing conflicts with other projects. It allows developers to manage project-specific libraries and versions, ensuring consistency and reproducibility. In the next step, setting the navigation bar, is a crucial element found at the top of web pages, offering users quick access to important sections or pages. Conversely, the footer, situated at the bottom of the page, supplies additional information like contact details, copyrights, and useful links, enriching the overall user experience. Alongside these, creating static files such as images, and stylesheets, were added for enhancing a website's design and interactivity by providing the necessary visual and interactive elements. These elements collectively ensure a well-structured, informative, and engaging web presence. 
 
 ![EPIC 1](./docs/websiteimages/sprint1.png)
 
@@ -72,13 +73,13 @@ This epic include base setup and an early stage app deployment to heroku so that
 
 **EPIC 3 - Error alerts, home and about page**
 
-This epic is about customizing error pages, especially the 404 and 403 pages, inorder to get best practice in the website development. It is not only enhances the user experience by providing helpful information but also ensures that the design and branding of our website are consistent even when errors occur. Additionally, for the 500 error, administrators should be alerted to investigate and resolve the underlying server issue promptly. A home page and an about page are fundamental components of a website, each serving a distinct purpose. The home page is the main landing page of our website, typically accessible via the root domain. The about page includes the website's mission, history, and contact information. The home page serves as the front door of our website, offering a snapshot of its content and enticing visitors to explore further, while the about page provides context and background information, fostering trust and connection with the audience. Both pages are essential for a well-rounded and user-friendly web presence.
+This epic is about customizing error pages, especially the 404 and 403 pages, in order to get best practice in the website development. It is not only enhances the user experience by providing helpful information but also ensures that the design and branding of our website are consistent even when errors occur. Additionally, for the 500 error, administrators should be alerted to investigate and resolve the underlying server issue promptly. A home page and an about page are fundamental components of a website, each serving a distinct purpose. The home page is the main landing page of our website, typically accessible via the root domain. The about page includes the website's mission, history, and contact information. The home page serves as the front door of our website, offering a snapshot of its content and enticing visitors to explore further, while the about page provides context and background information, fostering trust and connection with the audience. Both pages are essential for a well-rounded and user-friendly web presence.
 
 ![EPIC 3](./docs/websiteimages/sprint3.png)
 
 **EPIC 4 - Room list**
 
-The room list epic is for all stories that relate to the creating, deleting, editing and viewing of room list and details. This allows for regular users to view room list and room detail and for staff members to manage them with a admin panel.
+The room list epic is for all stories that relate to the creating, deleting, editing and viewing of room list and details. This allows for regular users to view room list and room detail and for staff members to manage them with an admin panel.
 
 ![EPIC 4](./docs/websiteimages/sprint4.png)
 
@@ -96,13 +97,13 @@ The booking epic is for all stories that relate to creating, viewing, updating a
 
 **EPIC 7 - User Profile and Review**
 
-This epic is for s user profile which is a dedicated page within our website that displays information about a user.It typically includes details such as the user's name, profile picture, contact information, and any additional personal or demographic data. A review is an evaluation or assessment of a booking, service, or experience submitted by a user or customer. Reviews include a written description of the user's experience, along with a rating  scale (stars points).
+This epic is for s user profile which is a dedicated page within our website that displays information about a user. It typically includes details such as the user's name, profile picture, contact information, and any additional personal or demographic data. A review is an evaluation or assessment of a booking, service, or experience submitted by a user or customer. Reviews include a written description of the user's experience, along with a rating  scale (stars points).
 
 ![EPIC 7](./docs/websiteimages/sprint7.png)
 
 **EPIC 8 - Documentation**
 
-This epic is for written materials and resources created during the software development process to plan, design, build, test, deploy, and maintain our software application.The documentation contributes to better project organization, easier maintenance and troubleshooting, and improved user experiences. It also aids in maintaining written or electronic materials that provide information about our project. Documentation serves various purposes, including communication, education, reference, and compliance. 
+This epic is for written materials and resources created during the software development process to plan, design, build, test, deploy, and maintain our software application. The documentation contributes to better project organization, easier maintenance and troubleshooting, and improved user experiences. It also aids in maintaining written or electronic materials that provide information about our project. Documentation serves various purposes, including communication, education, reference, and compliance. 
 
 #### User Stories
 
@@ -238,7 +239,7 @@ The last section of the home page contains a sample of rooms to enable visitors 
 
 **Footer**
 
-We've introduced a footer at the bottom of the site, featuring convenient links to our Twitter and Facebook profiles. This allows users to easily follow our Hotel Services on social media and stay updated with our website. To ensure accessibility, we've included descriptive aria-labels for these icons, making it clear to users employing assistive screen reading technology what the links are for. Additionally, to avoid disrupting the user experience, these links open in new tabs when clicked, preserving the continuity of their site visit.
+A footer has been introduced  at the bottom of the site, featuring convenient links to the Twitter and Facebook profiles. This allows users to easily follow our Hotel Services on social media and stay updated with our website. To ensure accessibility, we've included descriptive aria-labels for these icons, making it clear to users employing assistive screen reading technology what the links are for. Additionally, to avoid disrupting the user experience, these links open in new tabs when clicked, preserving the continuity of their site visit.
 
 ![Footer](./docs/websiteimages/footer.png)
 
@@ -265,7 +266,7 @@ A room list page was designed to enable hotel staff employees to add rooms in th
 
 **View Room Detail Page**
 
-A room detail page has been designed to allow users to see the current room views and services available and decide whether they are interested in the room price before booking. This information is available to everyone, login is not required.This approach prioritizes user-friendliness and ensures that core information is readily available to everyone.
+A room detail page has been designed to allow users to see the current room views and services available and decide whether they are interested in the room price before booking. This information is available to everyone, login is not required. This approach prioritizes user-friendliness and ensures that core information is readily available to everyone.
 
 ![roo detail1](./docs/websiteimages/roomdetail1.png)
 
@@ -376,7 +377,7 @@ Users also can edit their  profile picture, their username and their Bio or Abou
 ### Features Left To Implement
 - In a future release I would like to add a page which enable staff members to perform CRUD for room booking from UI without using the admin panel. 
 
-- I would like to give brief calander view of available booking dates for the user in order to make booking.
+- I would like to give brief calendar view of available booking dates for the user in order to make booking.
 
 
 ## The-Skeleton-Plane
@@ -455,7 +456,7 @@ Environment variables were stored in an env.py for local development for securit
 
 ## Design
 
-### Colour-Options
+### Color-Options
 
 The primary color scheme of the website is centered around a sleek and modern design. It features a classic combination of deep black (#000000) as the foundational text color, which provides a timeless backdrop. Crisp white (#FFF) font color ensures excellent readability and contrast.
 
@@ -480,7 +481,7 @@ The website's logo was created using a FREE LOGO online tool, thoughtfully incor
 The website's images were sourced from Pexels and Unsplash, both reputable platforms offering a wide selection of royalty-free images. This choice ensures that the visuals used on the website not only enhance its aesthetic appeal but also adhere to legal and ethical standards regarding image usage.
 
 
-## Technolgies
+## Technologies
 
 * Python 
   * Python is the programming language applied to design this application.
@@ -540,6 +541,9 @@ During the development process, the following Git commands were utilized to push
   * Click "Settings" and click Config Vars. Add the following config variables:
     * KEY: PORT
     * VALUE: 8000
+    * SECRET_KEY: (Your secret key)
+    * DATABASE_URL: (This include the database)
+    * CLOUDINARY_URL: (This include the cloudinary storage url)
   * Select Buildpacks and add buildpacks for Python and NodeJS (in that order).
   * Click to "Deploy". Select the deployment type to Github and enter repository name and connect.
   * At the bottom of the page go to Manual Deploy, select "main" branch and select "Deploy Branch".
@@ -553,3 +557,18 @@ To create a local copy of the repository code by cloning it just do the followin
   * Click on "HTTPS" and copy the link.
   * Open your IDE and install git.
   * On your cmd line write git clone "your https link".
+
+## Credits 
+
+The [Room and Living room Images](https://pixabay.com/images/search/hotel/) was taken from pexels.
+
+The [Bathroom Images](https://unsplash.com/s/photos/bathroom) was taken from unsplash.
+
+The [Logo Images](https://app.logo.com/login?app_return_path=%2Fdashboard) was taken from LOGO.com.
+
+[Youtube Tutorials ](https://www.youtube.com/watch?v=sBjbty691eI&list=PLXuTq6OsqZjbCSfiLNb2f1FOs8viArjWy&index=1) Django Recipe Sharing Tutorial by Dee Mc.
+
+Code institute Mentor Gareth McGirr.
+
+Code Institute for Full stack development.
+[online classes ](https://learn.codeinstitute.net/login?next=/).
