@@ -80,6 +80,7 @@ footer {
     bottom: 0;
     z-index: -1; 
     filter: brightness(50%);
+    object-fit: cover;
 }
 
 #services,
