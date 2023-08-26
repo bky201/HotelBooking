@@ -13,7 +13,7 @@
         <div class="col-md-3">
             <div class="review-img w-100">
                 {% if profile.image.url is not none %}
-                <img src="{{ profile.image.url }}" alt="{{profile.user.username}}'s profile image">
+                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image">
                 {% else %}
                 <img src="{% static '/images/no-photography-icon.webp' %}" alt="image not found icon">
                 {% endif %}
